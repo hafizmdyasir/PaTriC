@@ -47,7 +47,7 @@ def import_file(path):
 
 def validateDeck():
     '''Call all validating functions.'''
-    insertDefaults(Particle, Fields, Output)            #type:ignore
+    insertDefaults(Control, Particle, Fields, Output)            #type:ignore
     validatePresence(Control, Particle, Fields, Output) #type:ignore
     validateEntries(Control, Particle, Fields, Output)  #type:ignore
         

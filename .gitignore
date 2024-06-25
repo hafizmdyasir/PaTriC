@@ -1,9 +1,8 @@
 /.vscode
 /__pycache__
-/pypatric/__pycache__
 /data
-/inputs
+/inputs/
+/pypatric/
 /patric
-/temp
 *.gch
 *.pyc

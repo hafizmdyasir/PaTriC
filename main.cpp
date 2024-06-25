@@ -96,28 +96,41 @@ void calculationLoop()
      for (int i = 0; i < control.numIterations; i++)
      {
           if (control.readout_f > 0)
-               if ((i % control.readout_f == 0) || (i == control.numIterations-1))
-                    cout << endl << "\tIteration number " << i+1;
+               if ((i % control.readout_f == 0) || (i+1 == control.numIterations))
+                    cout << endl << "\tIteration number " << i;
 
-
+          // Calculate x_n+1/2
           Vector3D x_next_half = positions.at(i) + (velocities.at(i) * (control.dt / (2 * currentGamma)));
           
           Vector3D mField(0,0,0);
+          Vector3D eField(0,0,0);
+          Vector3D u_next(0,0,0);
+
+          // Find all fields
           for (int j = 0; j < fields.bFields.size(); j++)
                mField = mField + fields.bFields[j]->getField(x_next_half, i*control.dt);
-          Vector3D eField(0,0,0);
           for (int j = 0; j < fields.eFields.size(); j++)
                eField = eField + fields.eFields[j]->getField(x_next_half, i*control.dt);
-          
-          Vector3D u_next = integrate(eField, mField, velocities.at(i));
-          velocities.at(i + 1) = u_next;
-          positions.at(i + 1) = x_next_half + (velocities.at(i + 1) * (control.dt / (2 * currentGamma)));
+
+          // Store gamma and fields
+          gammas.at(i) = currentGamma;
+          efields.at(i) = eField;
+          bfields.at(i) = mField;
+
+          u_next = integrate(eField, mField, velocities.at(i));
+          velocities.at(i+1) = u_next;
+          positions.at(i+1) = x_next_half + (velocities.at(i + 1) * (control.dt / (2 * currentGamma)));
      }
 
      auto end = chrono::system_clock::now();
      chrono::duration<double> elapsed = end - start;
      timeTaken = elapsed.count();
      overallTime += timeTaken;
+
+     // When loop is finished, the last entry in gammas, efields, and bfields will not have been updated. Set them to nan.
+     gammas.at(control.numIterations) = NAN;
+     efields.at(control.numIterations) = Vector3D(NAN, NAN, NAN);
+     bfields.at(control.numIterations) = Vector3D(NAN, NAN, NAN);
 
      cout << endl << fixed << setprecision(4)
           << "\tCalculation loop finished in " << timeTaken << " seconds.\n";
@@ -158,12 +171,7 @@ int main(int argc, char **argv)
 
      for (int i = 0; i < target.count; i++)
      {
-          positions.clear();
-          velocities.clear();
-          positions.reserve(control.numIterations+1);
-          velocities.reserve(control.numIterations+1);
-          positions.resize(control.numIterations + 1);
-          velocities.resize(control.numIterations + 1);
+          resizeVectors();
 
           cout << endl << "Particle number " << i+1;
 
@@ -172,11 +180,15 @@ int main(int argc, char **argv)
           positions.at(0) = target.initialR(i);
 
           calculationLoop();
+
+          cout << "\tSaving particle info...\n";
           saveData(positions, velocities, outputInfo, control.dt, i);
-          //save(positions, velocities, outputInfo, control, timeTaken, i);
      }
 
-     cout << fixed << setprecision(4) << "\nTotal time for all particles: " << overallTime << " seconds" << endl;
+     cout << fixed << setprecision(4) << "\nTotal time for all particles: " << overallTime << " seconds.\n" 
+          << "Saving program run info..."
+          << endl;
+     
      saveInfo(outputInfo, control, target, overallTime);
      cleanupAndExit(0);
      return 0;

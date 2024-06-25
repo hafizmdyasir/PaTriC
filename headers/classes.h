@@ -99,6 +99,9 @@ public:
     string filePath;
     vector<string> headers;
 
+    bool dumpGamma;
+    bool dumpEx, dumpEy, dumpEz;
+    bool dumpBx, dumpBy, dumpBz;
     bool dumpX, dumpY, dumpZ;
     bool dumpVx, dumpVy, dumpVz;
     vector<string> dumpVariables;
@@ -107,12 +110,19 @@ public:
     Output(string _name, string _path, vector<string> _subs, vector<string> _vars)
         : fileName(_name), filePath(_path), headers(_subs)
         {
-            dumpX = contains(_vars, "position_x");
-            dumpY = contains(_vars, "position_y");
-            dumpZ = contains(_vars, "position_z");
-            dumpVx = contains(_vars, "velocity_x");
-            dumpVy = contains(_vars, "velocity_y");
-            dumpVz = contains(_vars, "velocity_z");
+            dumpX = contains(_vars, POS_X);
+            dumpY = contains(_vars, POS_Y);
+            dumpZ = contains(_vars, POS_Z);
+            dumpVx = contains(_vars, VEL_X);
+            dumpVy = contains(_vars, VEL_Y);
+            dumpVz = contains(_vars, VEL_Z);
+            dumpEx = contains(_vars, E_FIELD_X);
+            dumpEy = contains(_vars, E_FIELD_Y);
+            dumpEz = contains(_vars, E_FIELD_Z);
+            dumpBx = contains(_vars, B_FIELD_X);
+            dumpBy = contains(_vars, B_FIELD_Y);
+            dumpBz = contains(_vars, B_FIELD_Z);
+            dumpGamma = contains(_vars, GAMMA);
         }
 };
 

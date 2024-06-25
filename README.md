@@ -19,3 +19,6 @@ To run the program, take the following steps:
 The data from simulation runs is dumped into plain text `.dat` files, which can be opened via any software of your choice and easily plotted with any plotting tool.
 
 For the users' convenience, PaTriC ships with its own plotting utilities that are written in python.
+
+## Acknowledgements
+PaTriC has been developed under the supervision of Professor Dr. Vikrant Saxena at the Indian Institute of Technology, Delhi. The authors would like to acknowledge his contributions and interest in the program. Further, the authors acknowledge the central role that the institute has played in providing the resources and the means for PaTriC to see the light of day.

@@ -30,6 +30,9 @@ using namespace std;
 
 extern vector<Vector3D> positions;
 extern vector<Vector3D> velocities;
+extern vector<Vector3D> efields;
+extern vector<Vector3D> bfields;
+extern vector<double> gammas;
 extern double currentGamma;
 
 extern Fields fields;
@@ -37,10 +40,16 @@ extern Control control;
 extern Particles target;
 extern Output outputInfo;
 
-// Coil information
-extern MagneticCoil coilOne, coilTwo;
+
+/// @brief Reserve size and resize all vectors to control.numIterations+1
+void resizeVectors();
 
 
+/// @brief Initialize the system.
+/// @param _ctrl Control
+/// @param _prtcl Particle
+/// @param _fields Fields
+/// @param _out Output
 void initialize(Control _ctrl, Particles _prtcl, Fields _fields, Output _out);
 
 

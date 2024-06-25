@@ -43,6 +43,24 @@ void saveData(vector<Vector3D>& positions, vector<Vector3D>& velocities, Output 
         dataFile << "vy\t";
     if (outputInfo.dumpVz)
         dataFile << "vz\t";
+
+    if (outputInfo.dumpGamma)
+        dataFile << "gamma\t";
+
+    if (outputInfo.dumpEx)
+        dataFile << "Ex\t";
+    if (outputInfo.dumpEy)
+        dataFile << "Ey\t";
+    if (outputInfo.dumpEz)
+        dataFile << "Ez\t";
+    
+    if (outputInfo.dumpBx)
+        dataFile << "Bx\t";    
+    if (outputInfo.dumpBy)
+        dataFile << "By\t";
+    if (outputInfo.dumpBz)
+        dataFile << "Bz\t";
+
     
     dataFile << scientific << setprecision(12) << endl;
     for (int i = 0; i < positions.size(); ++i)
@@ -61,6 +79,23 @@ void saveData(vector<Vector3D>& positions, vector<Vector3D>& velocities, Output 
             dataFile << velocities[i][Y] << "\t";
         if (outputInfo.dumpVz)
             dataFile << velocities[i][Z] << "\t";
+
+        if (outputInfo.dumpGamma)
+            dataFile << gammas[i] << "\t";
+        
+        if (outputInfo.dumpEx)
+            dataFile << efields[i][X] << "\t";
+        if (outputInfo.dumpEy)
+            dataFile << efields[i][Y] << "\t";
+        if (outputInfo.dumpEz)
+            dataFile << efields[i][Z] << "\t";
+
+        if (outputInfo.dumpBx)
+            dataFile << bfields[i][X] << "\t";
+        if (outputInfo.dumpBy)
+            dataFile << bfields[i][Y] << "\t";
+        if (outputInfo.dumpBz)
+            dataFile << bfields[i][Z] << "\t";        
 
         dataFile << endl;
     }
