@@ -152,11 +152,11 @@ def validateEntries(control: dict, particle: dict, fields:dict, output: dict):
     
     
     # Step 3: Field deck
-    if not isinstance(fields[E_FIELD], tuple):
-        raise KeyError(f'Invalid E_FIELD: {fields[E_FIELD]} - Must be a tuple.')
+    if not isinstance(fields[E_FIELD], tuple) and not callable(fields[E_FIELD]):
+        raise KeyError(f'Invalid E_FIELD: {fields[E_FIELD]} - Must be a tuple or a function.')
     
-    if not isinstance(fields[B_FIELD], tuple):
-        raise KeyError(f'Invalid B_FIELD: {fields[B_FIELD]} - Must be a tuple.')
+    if not isinstance(fields[B_FIELD], tuple) and not callable(fields[B_FIELD]):
+        raise KeyError(f'Invalid B_FIELD: {fields[B_FIELD]} - Must be a tuple or a function.')
     
 
 

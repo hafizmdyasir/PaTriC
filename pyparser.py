@@ -16,8 +16,8 @@ Script to open the input file and do what needs be done.
 
 
 from importlib.util import spec_from_file_location, module_from_spec
+from os import makedirs
 import argparse
-import tempfile
 
 from pypatric.keys import *
 from deck_tools import *
@@ -55,6 +55,7 @@ def validateDeck():
 
 def writeToTemp():
 
+    makedirs('temp', exist_ok=True)
     with open('temp/config.dmp', 'w') as tempFile:
         
         tempFile.write("# CONTROL DICT\n")
@@ -67,6 +68,9 @@ def writeToTemp():
 
         tempFile.write("\n# FIELDS DICT\n")
         for (key, value) in Fields.items():   # type: ignore
+            if callable(value):
+                tempFile.write(f"{key}: {value.__name__}\n")
+                continue
             tempFile.write(f"{key}: {value}\n")
 
         tempFile.write("\n# OUTPUT DICT\n")
