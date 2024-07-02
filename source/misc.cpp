@@ -104,6 +104,36 @@ void clearScreen()
 }
 
 
+string formatDuration(chrono::milliseconds ms) 
+{
+    auto hours = chrono::duration_cast<chrono::hours>(ms);
+    ms -= hours;
+
+    auto minutes = chrono::duration_cast<chrono::minutes>(ms);
+    ms -= minutes;
+
+    auto seconds = chrono::duration_cast<chrono::seconds>(ms);
+    ms -= seconds;
+
+    auto milliseconds = chrono::duration_cast<chrono::milliseconds>(ms);
+
+    ostringstream oss;
+
+    if (hours.count() > 0)
+        oss << hours.count() << " hours, ";
+    
+    if (minutes.count() > 0)
+        oss << minutes.count() << " minutes, ";
+    
+    oss << seconds.count();
+
+    if (milliseconds.count() > 0)
+        oss << "." << setw(3) << setfill('0') << milliseconds.count() << " seconds";
+
+    return oss.str();
+}
+
+
 vector<float> parseFloatTuple(const string tupleStr) {
     vector<float> values;
     values.clear();

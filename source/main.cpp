@@ -29,8 +29,8 @@ Main file
 using namespace std;
 
 string integrator_name;
-double timeTaken = 0.0;
-double overallTime = 0.0;
+chrono::milliseconds timeTaken;
+chrono::milliseconds overallTime;
 auto integrate = borisIntegrator;
 
 bool displayPrecheckInformation()
@@ -123,17 +123,18 @@ void calculationLoop()
      }
 
      auto end = chrono::system_clock::now();
-     chrono::duration<double> elapsed = end - start;
-     timeTaken = elapsed.count();
+
+     timeTaken = chrono::duration_cast<chrono::milliseconds>(end-start);
      overallTime += timeTaken;
 
      // When loop is finished, the last entry in gammas, efields, and bfields will not have been updated. Set them to nan.
      gammas.at(control.numIterations) = NAN;
      efields.at(control.numIterations) = Vector3D(NAN, NAN, NAN);
      bfields.at(control.numIterations) = Vector3D(NAN, NAN, NAN);
-
+     
+     string timeTakenFormatted = formatDuration(timeTaken);
      cout << endl << fixed << setprecision(4)
-          << "\tCalculation loop finished in " << timeTaken << " seconds.\n";
+          << "\tCalculation loop finished in " << timeTakenFormatted << ".\n";
 }
 
 void cleanupAndExit(int code)
@@ -185,11 +186,11 @@ int main(int argc, char **argv)
           saveData(positions, velocities, outputInfo, control.dt, i);
      }
 
-     cout << fixed << setprecision(4) << "\nTotal time for all particles: " << overallTime << " seconds.\n" 
+     cout << fixed << setprecision(4) << "\nTotal time for all particles: " << formatDuration(overallTime) << ".\n" 
           << "Saving program run info..."
           << endl;
      
-     saveInfo(outputInfo, control, target, overallTime);
+     saveInfo(outputInfo, control, target, overallTime.count());
      cleanupAndExit(0);
      return 0;
 }

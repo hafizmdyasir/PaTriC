@@ -27,7 +27,7 @@ using namespace std;
 struct constants
 {
     // Boltzmann constant
-    static constexpr long double k = 1.38064852e-23;
+    static constexpr long double k_B = 1.38064852e-23;
 
     // Speed of light
     static constexpr long double c = 299792458;//137.035999084;
@@ -43,6 +43,12 @@ struct constants
 
     // Elementary charge.
     static constexpr long double e = 1.602176634e-19;
+
+    // Permittivity of vacuum
+    static constexpr long double epsilon_0 = 8.854187817e-12;
+
+    // Force constant for Coulomb force
+    static constexpr long double k = 8.987551787368e9;
 };
 
 

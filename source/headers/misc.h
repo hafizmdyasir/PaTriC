@@ -17,8 +17,12 @@ Helper functions. Must not include any dependency on PaTriC library.
 #ifndef MISC_H
 #define MISC_H
 
+#include <iostream>
+#include <sstream>
+#include <iomanip>
 #include <vector>
 #include <string>
+#include <chrono>
 
 
 using namespace std;
@@ -27,7 +31,7 @@ using namespace std;
 string getIntegratorName(int input);
 
 
-bool startsWith(const std::string& str, const std::string& prefix);
+bool startsWith(const string& str, const string& prefix);
 
 
 bool contains(vector<string> vec, string element);
@@ -37,6 +41,9 @@ void clearScreen();
 
 
 void printHeader();
+
+
+string formatDuration(chrono::milliseconds ms);
 
 
 /// @brief Extract floats from a tuple of strings.

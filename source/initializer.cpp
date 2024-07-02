@@ -27,7 +27,7 @@ vector<double> generateMaxwellian(double T, double m, int n)
     mt19937 gen(rd());
     uniform_real_distribution<> dis(0.0, 1.0);
     
-    double sigma = sqrt(constants::k*T/m);
+    double sigma = sqrt(constants::k_B*T/m);
 
     for (int i = 0; i < n; ++i) {
         // Generate Gaussian-distributed numbers using Box-Muller transform
