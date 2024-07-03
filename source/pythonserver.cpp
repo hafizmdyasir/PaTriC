@@ -20,39 +20,9 @@ Server that forks up a python process and calculates fields as required.
 
 
 
-PythonServer::PythonServer(const string& _sname, const string& _dpath): scriptName(_sname), deckPath(_dpath), pid(-1)
+PythonServer::PythonServer(string& _dpath): deckPath(_dpath), pid(-1)
 {
-    // Create the pipes
-    if (pipe(inputPipe) == -1 || pipe(outputPipe) == -1)
-        throw runtime_error("Failed to create pipes for reading and writing");
-
-    // Fork process and act depending on where one is.
-    pid = fork();
-    switch (pid)
-    {
-    case -1:
-        throw runtime_error("Failed to fork the process");
-        break;
-
-    case 0:
-        // In child process
-        close(inputPipe[1]);
-        close(outputPipe[0]);
-
-        dup2(inputPipe[0], STDIN_FILENO);
-        dup2(outputPipe[1], STDOUT_FILENO);
-
-        // The magic happens here
-        execlp("python3", "python3", scriptName.c_str(), "-f", deckPath.c_str(), (char*)NULL);
-        throw runtime_error("Failed to execute python process");
-        break;
-    
-    default:
-        // In parent process
-        close(inputPipe[0]);
-        close(outputPipe[1]);
-        break;
-    }
+    startServer(_dpath);
 }
 
 PythonServer::~PythonServer()
@@ -61,6 +31,46 @@ PythonServer::~PythonServer()
     close(outputPipe[0]);
     kill(pid, SIGTERM);
     waitpid(pid, nullptr, 0);
+}
+
+void PythonServer::startServer(const string& _dpath)
+{
+    deckPath = _dpath;
+    // Create the pipes
+    if (pipe(inputPipe) == -1 || pipe(outputPipe) == -1)
+        throw runtime_error("Failed to create pipes for reading and writing");
+
+    // Fork process and act depending on where one is.
+    pid = fork();
+    if (pid == -1) {
+        throw runtime_error("Failed to fork process");
+    } else if (pid == 0) {
+        // Child process
+        close(inputPipe[1]);
+        close(outputPipe[0]);
+
+        dup2(inputPipe[0], STDIN_FILENO);
+        dup2(outputPipe[1], STDOUT_FILENO);
+
+        // Using execvp to handle paths with spaces
+        char* args[] = {
+            const_cast<char*>("python3"),
+            const_cast<char*>("-u"),
+            const_cast<char*>("pyserver.py"),
+            const_cast<char*>("-f"),
+            const_cast<char*>(deckPath.c_str()),
+            nullptr
+        };
+
+        execvp("python3", args);
+        // If execvp returns, it must have failed.
+        perror("execvp");
+        exit(EXIT_FAILURE);
+    } else {
+        // Parent process
+        close(inputPipe[0]);
+        close(outputPipe[1]);
+    }
 }
 
 vector<string> PythonServer::split(const string& str, char delimiter) {

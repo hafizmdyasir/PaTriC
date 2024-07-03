@@ -36,8 +36,7 @@ using namespace std;
 class PythonServer
 {
 private:
-    const string scriptName;
-    const string deckPath;
+    string deckPath;
     int inputPipe[2];
     int outputPipe[2];
     pid_t pid;
@@ -59,7 +58,8 @@ private:
     bool readOutput(string& outputString);
 
 public:
-    PythonServer(const string& _sname, const string& _dpath);
+    PythonServer() {}
+    PythonServer(string& _dpath);
     ~PythonServer();
 
     /// @brief Use this function to calculate the fields at the given position and time.
@@ -68,6 +68,8 @@ public:
     /// @param result The Vector3D object where result will be stored.
     /// @return true if the read process succeeded
     bool callFunction(string functionName, Vector3D position, float time, Vector3D& result);
+
+    void startServer(const string& _deckPath);
 };
 
 

@@ -22,6 +22,7 @@ Sets up the problem in question.
 #include <vector>
 #include <cmath>
 
+#include "pythonserver.h"
 #include "magnetic.h"
 #include "classes.h"
 
@@ -40,6 +41,8 @@ extern Control control;
 extern Particles target;
 extern Output outputInfo;
 
+extern string inputDeckPath;
+extern PythonServer pythonServer;
 
 /// @brief Reserve size and resize all vectors to control.numIterations+1
 void resizeVectors();
@@ -51,6 +54,10 @@ void resizeVectors();
 /// @param _fields Fields
 /// @param _out Output
 void initialize(Control _ctrl, Particles _prtcl, Fields _fields, Output _out);
+
+
+/// @brief Initialize Python server. Call this if you need python server.
+void initializeServer();
 
 
 #endif // CONFIG_H

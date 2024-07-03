@@ -48,6 +48,17 @@ public:
 };
 
 
+/// @brief When a custom function is specified, this class will be used to store it.
+class CustomGeometry: public Geometry
+{
+private:
+    string functionName;
+public:
+    CustomGeometry(const string& _fName);
+    Vector3D getField(Vector3D position, double time) const override;
+};
+
+
 
 
 #endif // GEOMETRY_H

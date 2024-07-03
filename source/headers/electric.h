@@ -30,10 +30,26 @@ private:
 
 public:
     PointCharge() {}
-    PointCharge(const Vector3D& pos, double q) : chargeLocation(pos), charge(q) {}
+    PointCharge(Vector3D pos, double q) : chargeLocation(pos), charge(q) {}
 
     double getCharge() const { return charge; }
     Vector3D getPosition() const { return chargeLocation; }
+
+    Vector3D getField(Vector3D position, double time) const override;
+};
+
+
+class ElectricDipole: public Geometry
+{
+private:
+    Vector3D centerLocation;
+    Vector3D dipoleMoment;
+public:
+    ElectricDipole() {}
+    ElectricDipole(Vector3D pos, Vector3D mom) : centerLocation(pos), dipoleMoment(mom) {}
+
+    Vector3D getDipoleMoment() const { return dipoleMoment; }
+    Vector3D getPosition() const { return centerLocation; }
 
     Vector3D getField(Vector3D position, double time) const override;
 };

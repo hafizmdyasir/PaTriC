@@ -29,21 +29,18 @@ using namespace std;
 void printHeader()
 {
      clearScreen();
-     cout << " ####        #######                 ####   " << endl
-          << "#    #          #                   #    #  " << endl
-          << "#    #          #                   #       " << endl
-          << "#####   ###     #     ###   #####   #       " << endl
-          << "#      #   #    #    #   #    #     #       " << endl
-          << "#      #####    #    ####     #     #    #  " << endl
-          << "#      #   #    #    #   #  #####    ####   " << endl;
+     cout << " ####        #######                 ####   \n"
+          << "#    #          #                   #    #  \n"
+          << "#    #          #                   #       \n"
+          << "#####   ###     #     ###   #####   #       \n"
+          << "#      #   #    #    #   #    #     #       \n"
+          << "#      #####    #    ####     #     #    #  \n"
+          << "#      #   #    #    #   #  #####    ####   \n";
 
-     cout << endl << "Particle Tracker in C++"
-          << endl
-          << "By Mohammad Yasir"
-          << endl
-          << "Research Scholar"
-          << endl
-          << "IIT Delhi \n";
+     cout << "\nParticle Tracker in C++"
+          << "\nBy Mohammad Yasir"
+          << "\nResearch Scholar"
+          << "\nIIT Delhi\n" << endl;
 }
 
 

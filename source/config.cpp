@@ -30,6 +30,10 @@ Control control;
 Particles target;
 Output outputInfo;
 
+PythonServer pythonServer;
+string inputDeckPath;
+bool serverInitialized = false;
+
 void resizeVectors()
 {
     // Clear all vectors
@@ -65,5 +69,26 @@ void initialize(Control _ctrl, Particles _prtcl, Fields _fields, Output _out)
     resizeVectors();
 }
 
+void initializeServer()
+{
+    if (!serverInitialized)
+    {
+        serverInitialized = true;
+        pythonServer.startServer(inputDeckPath);
+    }
+}
 
+
+// Owing to something necessary, this is being defined here.
+CustomGeometry::CustomGeometry(const string& _fName): functionName(_fName)
+{
+    initializeServer();
+}
+
+Vector3D CustomGeometry::getField(Vector3D position, double time) const
+{
+    Vector3D result;
+    pythonServer.callFunction(functionName, position, time, result);
+    return result;
+}
 

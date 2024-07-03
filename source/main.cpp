@@ -62,9 +62,9 @@ bool displayPrecheckInformation()
           << "Fields configuration is:";
 
      for (auto& efg: fields.eFields)
-          cout << endl << (efg->getField(Vector3D(), 0)).to_string();
+          cout << endl << (efg->getField(Vector3D(), 1)).to_string();
      for (auto& bfg: fields.bFields)
-          cout << endl << (bfg->getField(Vector3D(), 0)).to_string();
+          cout << endl << (bfg->getField(Vector3D(), 1)).to_string();
 
      cout << endl
           << endl
@@ -113,7 +113,7 @@ void calculationLoop()
                eField = eField + fields.eFields[j]->getField(x_next_half, i*control.dt);
 
           // Store gamma and fields
-          gammas.at(i) = currentGamma;
+          gammas.at(i+1) = currentGamma;
           efields.at(i) = eField;
           bfields.at(i) = mField;
 
@@ -159,10 +159,10 @@ int main(int argc, char **argv)
           return 404;
      }
 
-     string configFile = argv[1];
+     inputDeckPath = argv[1];
      cout << endl
-          << "Loading configuration file located at " << configFile;
-     bool parseSuccessful = parseFile(configFile);
+          << "Loading configuration file located at " << inputDeckPath;
+     bool parseSuccessful = parseFile(inputDeckPath);
      if (!parseSuccessful)
           cleanupAndExit(-1);
 
@@ -179,6 +179,7 @@ int main(int argc, char **argv)
           currentGamma = 1 / sqrt(1 - target.initialV(i).squareAmp() / constants::c2);
           velocities.at(0) = target.initialV(i)*currentGamma;
           positions.at(0) = target.initialR(i);
+          gammas.at(0) = currentGamma;
 
           calculationLoop();
 

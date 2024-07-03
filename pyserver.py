@@ -16,7 +16,6 @@ This script is called from the PythonServer declared in .cpp. It stores custom f
 
 
 from importlib.util import spec_from_file_location, module_from_spec
-from pydoc import importfile
 import argparse, sys
 
 
@@ -25,6 +24,7 @@ def getFilePath():
     parser = argparse.ArgumentParser()
     parser.add_argument("-f", "--file", type=str)
     args = parser.parse_args()
+    print(args.file)
     return args.file
 
 
