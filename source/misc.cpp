@@ -125,7 +125,7 @@ string formatDuration(chrono::milliseconds ms)
     oss << seconds.count();
 
     if (milliseconds.count() > 0)
-        oss << "." << setw(3) << setfill('0') << milliseconds.count() << " seconds";
+        oss << "." << setw(5) << setfill('0') << milliseconds.count() << " seconds";
 
     return oss.str();
 }

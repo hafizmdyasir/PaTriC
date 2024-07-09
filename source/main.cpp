@@ -113,12 +113,13 @@ void calculationLoop()
                eField = eField + fields.eFields[j]->getField(x_next_half, i*control.dt);
 
           // Store gamma and fields
-          gammas.at(i+1) = currentGamma;
           efields.at(i) = eField;
           bfields.at(i) = mField;
 
           u_next = integrate(eField, mField, velocities.at(i));
+
           velocities.at(i+1) = u_next;
+          gammas.at(i+1) = currentGamma;
           positions.at(i+1) = x_next_half + (velocities.at(i + 1) * (control.dt / (2 * currentGamma)));
      }
 

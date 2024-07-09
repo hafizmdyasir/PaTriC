@@ -84,7 +84,7 @@ Vector3D higueraCary(Vector3D eField, Vector3D magField, Vector3D previousU)
     double s = 1 / (1 + t.squareAmp());
     double dotProd = u_minus*t;
 
-    Vector3D bracketTerm = u_minus + t*dotProd + (u_minus ^ t);
+    Vector3D bracketTerm = u_minus + (t*dotProd) + (u_minus ^ t);
     Vector3D u_plus = bracketTerm*s;
 
     Vector3D u_next = u_plus + eField*factor + (u_minus ^ t);
