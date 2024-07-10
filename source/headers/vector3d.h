@@ -51,28 +51,40 @@ public:
     Vector3D(vector<float> vals)
         : v1(vals[0]), v2(vals[1]), v3(vals[2]) {}
 
+    // Add two vectors
     Vector3D operator+(Vector3D other);
     
+    // Subtract two vectors
     Vector3D operator-(Vector3D other);
 
+    // Cross-product of two vectors
     Vector3D operator^(Vector3D other);
     
+    // Multiply the vector with a scalar.
     Vector3D operator*(double factor);
     
+    // Divide the vector by a scalar. 
     Vector3D operator/(double factor);
     
+    // Check if two vectors are equal. Return true if and only if all components are equal.
     bool operator==(Vector3D other);
 
+    // Dot product of two vectors.
     long double operator*(Vector3D other);
 
+    // Get particular components using indexing X = 1 , Y = 2, Z = 3.
     long double& operator[] (int i);
     
+    // cout the vector, with optional argument to print a name before it.
     void printVector(string name = "");
 
+    // String representation in terms of i, j, and k.
     string to_string();
     
+    // Get the magnitude of the vector.
     long double amplitude();
 
+    // Get the square of the magnitude of the vector.
     long double squareAmp();
 };
 

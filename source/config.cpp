@@ -23,7 +23,7 @@ vector<Vector3D> velocities;
 vector<Vector3D> efields;
 vector<Vector3D> bfields;
 vector<double> gammas;
-double currentGamma;
+long double currentGamma;
 
 Fields fields;
 Control control;

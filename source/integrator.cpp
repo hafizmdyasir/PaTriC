@@ -30,7 +30,7 @@ void presetIntegrators(Particles particle, double deltaT)
 Vector3D borisIntegrator(Vector3D eField, Vector3D magField, Vector3D previousU)
 {
     Vector3D u_minus = previousU + (eField*factor);
-    double gamma_minus = sqrt(1 + (u_minus/constants::c).squareAmp());
+    double gamma_minus = sqrt(1 + (u_minus.squareAmp()/constants::c2));
 
     Vector3D t = magField*(factor/gamma_minus); 
     Vector3D s = t * (2/(1 + t.squareAmp()));
@@ -51,12 +51,14 @@ Vector3D vayIntegrator(Vector3D eField, Vector3D magField, Vector3D previousU)
     Vector3D u_next_half = previousU + (fieldContri * factor);
 
     Vector3D tau = magField*factor;
+    double tau2 = tau.squareAmp();
+
     Vector3D u_prime = u_next_half + (eField*factor);
 
-    float u_star = u_prime*(tau/constants::c);
+    float u_star = (u_prime*tau)/constants::c;
     float gamma_prime = sqrt(1 + u_prime.squareAmp()/constants::c2);
-    float sigma = (gamma_prime*gamma_prime) - tau.squareAmp();
-    float gamma_next = sqrt(0.5  * (sigma + sqrt(sigma*sigma + 4*(tau.squareAmp() + u_star*u_star))));
+    float sigma = (gamma_prime*gamma_prime) - tau2;
+    float gamma_next = sqrt(0.5  * (sigma + sqrt(sigma*sigma + 4*(tau2 + u_star*u_star))));
     Vector3D t = tau/gamma_next;
 
     double s = 1 / (1 + t.squareAmp());
@@ -71,14 +73,15 @@ Vector3D vayIntegrator(Vector3D eField, Vector3D magField, Vector3D previousU)
 
 Vector3D higueraCary(Vector3D eField, Vector3D magField, Vector3D previousU)
 {
-    Vector3D u_minus = previousU + eField*factor;
-    double gamma_minus = sqrt(1 + u_minus.squareAmp()/constants::c2);
+    Vector3D u_minus = previousU + (eField*factor);
+    double gamma_minus = sqrt(1 + (u_minus.squareAmp()/constants::c2));
     
     Vector3D tau = magField*factor;
-    double u_star = u_minus * (tau/constants::c);
-    double sigma = (gamma_minus*gamma_minus) - tau.squareAmp();
-    double gamma_plus = sqrt(0.5 * (sigma + sqrt(sigma*sigma + 4*(tau.squareAmp() + (u_star*u_star)))));
+    double tau2 = tau.squareAmp();
 
+    double u_star = (u_minus * tau)/constants::c;
+    double sigma = (gamma_minus*gamma_minus) - tau2;
+    double gamma_plus = sqrt(0.5 * (sigma + sqrt(sigma*sigma + 4*(tau2 + (u_star*u_star)))));
 
     Vector3D t = tau / gamma_plus;
     double s = 1 / (1 + t.squareAmp());
@@ -87,7 +90,7 @@ Vector3D higueraCary(Vector3D eField, Vector3D magField, Vector3D previousU)
     Vector3D bracketTerm = u_minus + (t*dotProd) + (u_minus ^ t);
     Vector3D u_plus = bracketTerm*s;
 
-    Vector3D u_next = u_plus + eField*factor + (u_minus ^ t);
+    Vector3D u_next = u_plus + (eField*factor) + (u_minus ^ t);
     Vector3D v_next = u_next * (constants::c / sqrt(constants::c2 + u_next.squareAmp()));
     currentGamma = 1 / sqrt(1 - v_next.squareAmp()/constants::c2);
 

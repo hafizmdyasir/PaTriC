@@ -54,7 +54,6 @@ Vector3D Vector3D::operator^(Vector3D other)
     return result;
 }
 
-
 Vector3D Vector3D::operator*(double factor)
 {
     return Vector3D(this->v1 * factor, this->v2 * factor, this->v3 * factor);

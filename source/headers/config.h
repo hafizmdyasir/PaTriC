@@ -34,7 +34,7 @@ extern vector<Vector3D> velocities;
 extern vector<Vector3D> efields;
 extern vector<Vector3D> bfields;
 extern vector<double> gammas;
-extern double currentGamma;
+extern long double currentGamma;
 
 extern Fields fields;
 extern Control control;

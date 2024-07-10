@@ -50,15 +50,19 @@ vector<Vector3D> getUniformIn(Vector3D minValue, Vector3D maxValue, int numPoint
     values.reserve(numPoints);
     values.resize(numPoints);
     
-    double dx = (maxValue[X] - minValue[X]) / (numPoints - 1);
-    double dy = (maxValue[Y] - minValue[Y]) / (numPoints - 1);
-    double dz = (maxValue[Z] - minValue[Z]) / (numPoints - 1);
+    double dx = 0.0;
+    double dy = 0.0;
+    double dz = 0.0;
+    
+    dx = (maxValue[X] - minValue[X]) / (numPoints - 1);
+    dy = (maxValue[Y] - minValue[Y]) / (numPoints - 1);
+    dz = (maxValue[Z] - minValue[Z]) / (numPoints - 1);
 
     for (int i = 0; i < numPoints; i++)
     {
-        double x = minValue[X] + i * dx;
-        double y = minValue[Y] + i * dy;
-        double z = minValue[Z] + i * dz;
+        long double x = minValue[X] + i * dx;
+        long double y = minValue[Y] + i * dy;
+        long double z = minValue[Z] + i * dz;
         values[i] = Vector3D(x, y, z);
     }
     return values;
@@ -75,9 +79,9 @@ vector<Vector3D> getRandomPositions(Vector3D rMinimum, Vector3D rMaximum, int nu
     positions.resize(numPoints);
     for (int i = 0; i < numPoints; i++)
     {
-        double xRand = rMinimum[X] + (rMaximum[X] - rMinimum[X]) * ((double)rand() / RAND_MAX);
-        double yRand = rMinimum[Y] + (rMaximum[Y] - rMinimum[Y]) * ((double)rand() / RAND_MAX);
-        double zRand = rMinimum[Z] + (rMaximum[Z] - rMinimum[Z]) * ((double)rand() / RAND_MAX);
+        long double xRand = rMinimum[X] + (rMaximum[X] - rMinimum[X]) * ((long double)rand() / RAND_MAX);
+        long double yRand = rMinimum[Y] + (rMaximum[Y] - rMinimum[Y]) * ((long double)rand() / RAND_MAX);
+        long double zRand = rMinimum[Z] + (rMaximum[Z] - rMinimum[Z]) * ((long double)rand() / RAND_MAX);
         positions[i] = Vector3D(xRand, yRand, zRand);
     }
     return positions;
