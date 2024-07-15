@@ -44,6 +44,7 @@ def insertDefaults(control: dict, particle: dict, fields: dict, output: dict):
 
     # Output dict
     __insertIfNotExists(output, FILEPATH, '')
+    __insertIfNotExists(output, DUMP_INFO_FILE, True)
     __insertIfNotExists(output, FILE_HEADER, tuple([]))
 
     if (len(output[FILEPATH]) > 0) and not str(output[FILEPATH]).endswith('/'):
@@ -106,6 +107,9 @@ def validatePresence(control: dict, particle: dict, fields:dict, output: dict):
     
     if FILE_HEADER not in output.keys():
         raise KeyError(f'Missing output key: FILE_HEADER')
+    
+    if DUMP_INFO_FILE not in output.keys():
+        raise KeyError(f'Missing output key: DUMP_INFO_FILE')
     
     if DUMP_VARIABLES not in output.keys():
         raise KeyError(f'Missing output key: DUMP_VARIABLES')
