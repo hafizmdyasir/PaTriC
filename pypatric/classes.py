@@ -11,8 +11,18 @@ All rights reserved. No part of this code may be used, modified, shared, or repr
 
 DESCRIPTION
 -----------
-Classes that represent various types of electric and magnetic field geometries. Also includes options for declaring particle positions and velocities.
+Classes that represent various types of electric and magnetic field geometries. 
+Serves as the base file and more geometries are defined in files electric.py and magnetic.py
 '''
+
+
+
+
+
+from typing import Literal
+
+variablesDictionary = {'T': 0, 'X': 1, 'Y': 2, 'Z': 3}  
+
 
 
 class Random:
@@ -69,18 +79,18 @@ class Maxwellian:
     '''
     Represents a random velocity distribution that is maxwellian in nature.
     '''
-    def __init__(self, temperature: float):
+    def __init__(self, temperature: tuple[float, float, float]):
         '''
         Parameters
         ----------
-        temperature : float
-            Temperature of the velocity distribution in Kelvins.
+        temperature : tuple
+            Temperature of the velocity distribution in Kelvins. The entries in this tuple correspond to the temperatures for x, y, and z directions, respectively.
         '''
         self.temperature = temperature
     
 
     def __str__(self) -> str:
-        return "Maxwellian" + f"({self.temperature})"
+        return f'Maxwellian({self.temperature[0], self.temperature[1], self.temperature[2]}'
     
     def __repr__(self) -> str:
         return self.__str__()
@@ -110,53 +120,54 @@ class Static:
         return self.__str__()
 
 
-
-class Wire:
+class SinField:
     '''
-    Represents a wire of finite or infinite length placed at a finite distance from the origin.'''
-
-    def __init__(self, current: float, length: float, position: tuple[float, float, float], direction: int):
+    Represents an electric/magnetic field that varies sinusodially in either time, x, y, or z. 
+    That is, the field will be calculated as f = sin(omega*variable + phi)
+    '''
+    def __init__(self, variable: Literal['X', 'Y', 'Z', 'T'], omega: float, phi: float = 0):
         '''
         Parameters
         ----------
-        current : float Current flowing through the wire.
-        length : float Length of the wire.
-        position : tuple Position of the wire's midpoint.
-        direction : tuple angles made by x, y, and z axes respectively, in radians.
-        '''
-        self.length = length
-        self.current = current
-        self.position = position
-        self.direction = direction
-    
+        variable: The variable in which, the field varies.
+        omega: The angular frequency of the field.
+        phi: The phase of the field (if any).
+        '''  
+        self.variable = variablesDictionary[variable]
+        self.omega = omega
+        self.phi = phi
 
     def __str__(self) -> str:
-        return f"Wire({self.current}, {self.length}, {self.position[0]}, {self.position[1]}, {self.position[2]}, {self.direction})"
+        return f'SinField({self.variable}, {self.omega}, {self.phi})'
     
     def __repr__(self) -> str:
         return self.__str__()
     
 
-
-
-class Coil:
+class GaussField:
     '''
-    Represents a coil of given radius, carrying a certain current, placed at a point along the z-axis. No other axis is supported at the moment.
+    Represents a gaussian field in either time, x, y, or z.
+    The field will be calculated as f = a * exp( ((variable-b) / c)**m)
+    The default value for m is 2. Support is provided for other powers.
     '''
-    def __init__(self, radius: float, current: float, zPosition: float = 0):
+    def __init__(self, variable: Literal['X', 'Y', 'Z', 'T'], a: float, b: float, c: float, m: float = 2):
         '''
         Parameters
         ----------
-        radius : float Radius of the coil.
-        current : float Current flowing through the coil. It is redundant to include number of turns since that can easily be incorporated by multiplying the current with the number of turns.
-        zPosition : float Position of the coil along the z-axis.
+        variable: The variable in which, the field varies.
+        a: The amplitude of the field.
+        b: The mean of the field.
+        c: The standard deviation of the field.
+        m: Optional parameter to provide support for Super Gauss functions.
         '''
-        self.radius = radius
-        self.current = current
-        self.zPosition = zPosition
+        self.variable = variablesDictionary[variable]
+        self.a = a
+        self.b = b
+        self.c = c
+        self.m = m
 
     def __str__(self) -> str:
-        return f"Coil({self.radius}, {self.current}, {self.zPosition})"
+        return f'GaussField({self.variable}, {self.a}, {self.b}, {self.c}, {self.m})'
     
     def __repr__(self) -> str:
         return self.__str__()

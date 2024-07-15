@@ -38,6 +38,7 @@ B_FIELD = 'b_field'
 FILENAME = 'f_name'
 FILEPATH = 'f_path'
 FILE_HEADER = 'f_header'
+DUMP_INFO_FILE = 'dump_info_file'
 DUMP_VARIABLES = 'dump_variables'
 
 # VARIABLE NAMES FOR DUMPING

@@ -168,9 +168,10 @@ Output processOutputInfo(unordered_map<string, string> &dataDump)
 {
     string fileName = dataDump[FILENAME];
     string outputPath = dataDump[FILEPATH];
+    bool infoDump = (dataDump[DUMP_INFO_FILE] == "True");
     vector<string> headers = parseStringTuple(dataDump[FILE_HEADER]);
     vector<string> dumpVars = parseStringTuple(dataDump[DUMP_VARIABLES]);
-    return Output(fileName, outputPath, headers, dumpVars);
+    return Output(fileName, outputPath, headers, infoDump, dumpVars);
 }
 
 void processDumpMap(unordered_map<string, string> &dataDump)

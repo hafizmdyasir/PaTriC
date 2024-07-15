@@ -3,7 +3,6 @@
 /data
 /inputs/
 /plotters/
-/pypatric/
 /patric
 *.gch
 *.pyc

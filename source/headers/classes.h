@@ -97,6 +97,7 @@ class Output
 public:
     string fileName;
     string filePath;
+    bool dumpInfoFile;
     vector<string> headers;
 
     bool dumpGamma;
@@ -104,11 +105,10 @@ public:
     bool dumpBx, dumpBy, dumpBz;
     bool dumpX, dumpY, dumpZ;
     bool dumpVx, dumpVy, dumpVz;
-    vector<string> dumpVariables;
 
     Output() {}
-    Output(string _name, string _path, vector<string> _subs, vector<string> _vars)
-        : fileName(_name), filePath(_path), headers(_subs)
+    Output(string _name, string _path, vector<string> _subs, bool _infoDump, vector<string> _vars)
+        : fileName(_name), filePath(_path), dumpInfoFile(_infoDump), headers(_subs)
         {
             dumpX = contains(_vars, POS_X);
             dumpY = contains(_vars, POS_Y);

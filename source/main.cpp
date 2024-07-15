@@ -188,11 +188,12 @@ int main(int argc, char **argv)
           saveData(positions, velocities, outputInfo, control.dt, i);
      }
 
-     cout << fixed << setprecision(4) << "\nTotal time for all particles: " << formatDuration(overallTime) << ".\n" 
-          << "Saving program run info..."
-          << endl;
-     
-     saveInfo(outputInfo, control, target, overallTime.count());
+     cout << fixed << setprecision(4) << "\nTotal time for all particles: " << formatDuration(overallTime) << ".\n"; 
+     if (outputInfo.dumpInfoFile)
+     {
+          cout << "Saving program run info..." << endl;
+          saveInfo(outputInfo, control, target, overallTime.count());
+     }
      cleanupAndExit(0);
      return 0;
 }
