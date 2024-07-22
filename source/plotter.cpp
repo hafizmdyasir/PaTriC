@@ -74,11 +74,11 @@ void saveData(vector<Vector3D>& positions, vector<Vector3D>& velocities, Output 
             dataFile << positions[i][Z] << "\t";
 
         if (outputInfo.dumpVx)
-            dataFile << velocities[i][X] << "\t";
+            dataFile << velocities[i][X]/gammas[i] << "\t";
         if (outputInfo.dumpVy)
-            dataFile << velocities[i][Y] << "\t";
+            dataFile << velocities[i][Y]/gammas[i] << "\t";
         if (outputInfo.dumpVz)
-            dataFile << velocities[i][Z] << "\t";
+            dataFile << velocities[i][Z]/gammas[i] << "\t";
 
         if (outputInfo.dumpGamma)
             dataFile << gammas[i] << "\t";

@@ -83,7 +83,7 @@ const string B_FIELD = "b_field";
 const string FILENAME = "f_name";
 const string FILEPATH = "f_path";
 const string FILE_HEADER = "f_header";
-const string DUMP_INFO_FILE = 'dump_info_file';
+const string DUMP_INFO_FILE = "dump_info_file";
 const string DUMP_VARIABLES = "dump_variables";
 
 // DUMP VARIABLES
