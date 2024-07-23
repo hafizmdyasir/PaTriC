@@ -56,7 +56,6 @@ bool displayPrecheckInformation()
           break;
      }
      cout << endl
-          << endl
           << "Running the program for " << control.numIterations
           << " steps with time interval " << control.dt << " using " << integrator_name << " integrator";
 
@@ -201,7 +200,7 @@ int main(int argc, char **argv)
 
 
      cout << endl
-          << "Loading configuration file located at " << inputDeckPath;
+          << "Loading configuration file located at " << inputDeckPath << endl;
      bool parseSuccessful = parseFile(inputDeckPath);
      if (!parseSuccessful)
           cleanupAndExit(-1);

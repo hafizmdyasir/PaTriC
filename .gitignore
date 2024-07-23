@@ -2,5 +2,6 @@
 /__pycache__
 /plotters/
 /runtime/patric
+/runtime/__pycache__
 *.gch
 *.pyc

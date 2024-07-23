@@ -45,14 +45,6 @@ def import_file(path):
     globals().update(vars(module))
 
 
-def validateDeck():
-    '''Call all validating functions.'''
-    insertDefaults(Control, Particle, Fields, Output)            #type:ignore
-    validatePresence(Control, Particle, Fields, Output) #type:ignore
-    validateEntries(Control, Particle, Fields, Output)  #type:ignore
-        
-
-
 def writeToTemp():
 
     makedirs('temp', exist_ok=True)
@@ -81,5 +73,5 @@ def writeToTemp():
 # First, open file, get all attributes, and write them to temp.
 pat = getFilePath()
 import_file(pat)
-validateDeck()
+insertDefaults(Control, Particle, Fields, Output)#type:ignore
 writeToTemp()
