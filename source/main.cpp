@@ -22,6 +22,9 @@ Main file
 #include "headers/misc.h"
 
 #include <iostream>
+#include <limits.h>
+#include <unistd.h>
+#include <string.h>
 #include <iomanip>
 #include <chrono>
 #include <math.h>
@@ -148,6 +151,31 @@ void cleanupAndExit(int code)
      exit(code);
 }
 
+int findPythonScripts(char *deckpath)
+{
+     char path[PATH_MAX];
+     ssize_t count = readlink("/proc/self/exe", path, PATH_MAX);
+     if (count == -1) {
+          perror("readlink");
+          return 1;
+     }
+     path[count] = '\0';
+
+     char *last_slash = strrchr(path, '/');
+     if (last_slash != NULL) {
+          *last_slash = '\0';
+     }
+
+     for(char character: path)
+     {
+          if (character == '\0') break;
+          if (character == ' ') execPath += "\\ ";
+          else execPath += character;
+     }
+     
+     return 0;
+}
+
 int main(int argc, char **argv)
 {
      printHeader();
@@ -156,11 +184,22 @@ int main(int argc, char **argv)
      {
           cout << endl
                << endl
-               << "No configuration file specified. Program will exit.";
+               << "No configuration file specified. Program will exit." << endl;
           return 404;
      }
 
+     int errorCode = findPythonScripts(argv[1]);
+     if (errorCode != 0)
+     {
+          cout << endl
+               << endl
+               << "Error with locating necessary python scripts. Program will exit." << endl;
+          return 202;
+     }
+
      inputDeckPath = argv[1];
+
+
      cout << endl
           << "Loading configuration file located at " << inputDeckPath;
      bool parseSuccessful = parseFile(inputDeckPath);

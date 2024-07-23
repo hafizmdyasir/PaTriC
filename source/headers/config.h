@@ -41,6 +41,7 @@ extern Control control;
 extern Particles target;
 extern Output outputInfo;
 
+extern string execPath;
 extern string inputDeckPath;
 extern PythonServer pythonServer;
 

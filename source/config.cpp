@@ -32,6 +32,7 @@ Output outputInfo;
 
 PythonServer pythonServer;
 string inputDeckPath;
+string execPath;
 bool serverInitialized = false;
 
 void resizeVectors()
