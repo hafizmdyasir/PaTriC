@@ -19,6 +19,13 @@ from importlib.util import spec_from_file_location, module_from_spec
 from os import makedirs
 import argparse
 
+# Add the script path temporarily to import path so that the modules are resolved.
+from os.path import dirname, abspath
+script_dir = dirname(abspath(__file__))
+from sys import path
+path.insert(0, script_dir+'/pypatric')
+path.insert(0, script_dir)
+
 from pypatric.keys import *
 from deck_tools import *
 

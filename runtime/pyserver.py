@@ -18,6 +18,12 @@ This script is called from the PythonServer declared in .cpp. It stores custom f
 from importlib.util import spec_from_file_location, module_from_spec
 import argparse, sys
 
+# Add the script path temporarily to import path so that the modules are resolved.
+from os.path import dirname, abspath
+script_dir = dirname(abspath(__file__))
+from sys import path
+path.insert(0, script_dir+'/pypatric')
+path.insert(0, script_dir)
 
 def getFilePath():
     '''Get file path from arguments.'''

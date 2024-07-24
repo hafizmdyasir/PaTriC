@@ -14,6 +14,13 @@ DESCRIPTION
 Insert defaults and validate deck
 '''
 
+# Add the script path temporarily to import path so that the modules are resolved.
+from os.path import dirname, abspath
+script_dir = dirname(abspath(__file__))
+from sys import path
+path.insert(0, script_dir+'/pypatric')
+path.insert(0, script_dir)
+
 from pypatric.keys import *
 from pypatric.classes import *
 
