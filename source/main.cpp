@@ -188,8 +188,7 @@ int main(int argc, char **argv)
           return 404;
      }
 
-     int errorCode = findPythonScripts(argv[1]);
-     if (errorCode != 0)
+     if (findPythonScripts(argv[1]) != 0)
      {
           cout << endl
                << endl
@@ -198,14 +197,11 @@ int main(int argc, char **argv)
      }
 
      inputDeckPath = argv[1];
+     cout << "\nInput file: " << inputDeckPath << endl;
 
-
-     cout << endl
-          << "Input file: " << inputDeckPath << endl;
      bool parseSuccessful = parseFile(inputDeckPath);
      if (!parseSuccessful || !displayPrecheckInformation())
           cleanupAndExit(-1);
-
 
      presetIntegrators(target, control.dt);
      for (int i = 0; i < target.count; i++)

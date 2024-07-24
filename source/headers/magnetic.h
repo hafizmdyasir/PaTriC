@@ -22,31 +22,6 @@ Defines various magnetic field configurations.
 #include "classes.h"
 
 
-
-class MagneticWire: public Geometry
-{
-private:
-    double current;
-    double length;
-    int direction;
-
-    Vector3D midpoint;
-
-public:
-    MagneticWire() {}
-    MagneticWire(double _cur, double _len, Vector3D _mid, int _dir)
-        : current(_cur), length(_len), midpoint(_mid), direction(_dir) {}
-
-    double getLength() const { return length; }
-    double getCurrent() const { return current; }
-    int getDirection() const { return direction; }
-    Vector3D getMidpoint() const { return midpoint; }
-    
-    string getDescription() const override;
-    Vector3D getField(Vector3D position, double time) const override;
-};
-
-
 class MagneticCoil: public Geometry
 {
 private:

@@ -19,19 +19,6 @@ Defines various magnetic field configurations.
 
 
 
-Vector3D MagneticWire::getField(Vector3D position, double time) const
-{
-    return Vector3D(0, 0, 0);
-}
-
-string MagneticWire::getDescription() const
-{
-    return "Magnetic Wire";
-}
-
-
-
-
 
 Vector3D onAxisField(Vector3D r_cartesian, double z_coil, double radius, double current)
 {

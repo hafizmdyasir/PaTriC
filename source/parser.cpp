@@ -66,7 +66,7 @@ Particles processParticles(unordered_map<string, string> &dataDump)
     // The posInit and velInit variable is sure to be a tuple containing object(s) of custom type. This is ensured in the deck_tools file.
     // We extract each item here.
     vector<ParsedType> parsedPositions = extractTypes(posInit);
-    vector<ParsedType> parsedVelocities = extractTypes(velInit); // Same for velocities.
+    vector<ParsedType> parsedVelocities = extractTypes(velInit);
 
     // Now, loop over the positions and check which type is requested.
     for (ParsedType type : parsedPositions)
@@ -89,6 +89,8 @@ Particles processParticles(unordered_map<string, string> &dataDump)
                 particleCount);
             break;
         }
+
+        // If control reaches here, then Static positioning is requested for each of the particles.
         positions.push_back(Vector3D(params[0], params[1], params[2]));
     }
 
@@ -109,6 +111,8 @@ Particles processParticles(unordered_map<string, string> &dataDump)
             velocities = getRandomVelocities(params[0], mass * constants::m_e, particleCount);
             break;
         }
+
+        // If control reaches here, then Static velocity is requested for each of the particles.
         velocities.push_back(Vector3D(params[0], params[1], params[2]));
     }
 
@@ -136,11 +140,6 @@ Fields processFields(unordered_map<string, string> &dataDump)
                 bFieldGeometries.push_back(new StaticGeometry(params[0], params[1], params[2]));
             else if (name == "Coil")
                 bFieldGeometries.push_back(new MagneticCoil(params[0], params[1], params[2]));
-            else if (name == "Wire")
-            {
-                Vector3D midpoint = Vector3D(params[3], params[4], params[5]);
-                bFieldGeometries.push_back(new MagneticWire(params[0], params[1], midpoint, params[6]));
-            }
         }
     }
 
