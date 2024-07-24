@@ -51,7 +51,8 @@ struct constants
     static constexpr long double k = 8.987551787368e9;
 };
 
-
+// Key that represents time.
+const int T = 0;
 // Key for accessing X component of Vector3D object
 const int X = 1;
 // Key for accessing Y component of Vector3D object

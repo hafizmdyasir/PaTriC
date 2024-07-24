@@ -49,20 +49,17 @@ Vector3D GaussGeometry::getField(Vector3D position, double time) const
 {
     switch (variable)
     {
-        case 't':
+        case T:
             break;
             
-        case 'X':
-        case 'x':
+        case X:
 
             break;
-        case 'Y':
-        case 'y':
+        case Y:
 
             break;
 
-        case 'Z':
-        case 'z':
+        case Z:
 
             break;
         default:

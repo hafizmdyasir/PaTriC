@@ -57,12 +57,12 @@ public:
 class SinGeomtry: public Geometry
 {
 private:
-    char variable;
+    short variable;
     double amplitude, frequency;
     double phase;
 
 public:
-    SinGeomtry(char _var, double _amp, double _freq, double _phi)
+    SinGeomtry(short _var, double _amp, double _freq, double _phi)
         : variable(_var), amplitude(_amp), frequency(_freq), phase(_phi) {}
 
     string getDescription() const { return "Sinusoidal in " + variable; }
@@ -75,10 +75,10 @@ class GaussGeometry: public Geometry
 {
 private:
     double amp, center, fwhm, power;
-    char variable;
+    short variable;
 
 public:
-    GaussGeometry(double _amp, double _ctr, double _fwhm, double _pow, char _var)
+    GaussGeometry(double _amp, double _ctr, double _fwhm, double _pow, short _var)
         : amp(_amp), center(_ctr), fwhm(_fwhm), power(_pow), variable(_var) {}
 
     string getDescription() const { return "Gaussian in " + variable; }
