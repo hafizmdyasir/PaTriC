@@ -55,31 +55,32 @@ bool displayPrecheckInformation()
           integrate = higueraCary;
           break;
      }
-     cout << endl
-          << "Running the program for " << control.numIterations
-          << " steps with time interval " << control.dt << " using " << integrator_name << " integrator";
+
 
      cout << endl
-          << endl
-          << "Fields configuration is:";
-
-     for (auto& efg: fields.eFields)
-          cout << endl << (efg->getField(Vector3D(), 1)).to_string();
-     for (auto& bfg: fields.bFields)
-          cout << endl << (bfg->getField(Vector3D(), 1)).to_string();
+          << "System Information\n"
+          << "Number of iterations   : " << control.numIterations << "\n"
+          << "Time step in seconds   : " << control.dt << "\n"
+          << "End time of simulation : " << control.numIterations*control.dt << "\n";
 
      cout << endl
-          << endl
-          << "Target configuration is:";
+          << "Fields Information At Origin and t = 0\n";
+     for(auto& efg: fields.eFields)
+          cout << efg->getDescription() << "\n";
+     for(auto& bfg: fields.bFields)
+          cout << bfg->getDescription() << "\n";
 
-     cout << endl << "Count   : " << target.count;
-     cout << endl << "Charge  : " << target.charge;
-     cout << endl << "Mass    : " << target.mass;
+     cout << endl
+          << "Target Information\n"
+          << "Count  :  " << target.count << "\n"
+          << "Charge : " << target.charge << "\n"
+          << "Mass   :  " << target.mass << "\n";
+
      for (int i = 0; i < target.count; i++)
      {
           cout << endl << "Particle " << i+1;
-          target.initialPositions[i].printVector("Initial Position");
-          target.initialVelocities[i].printVector("Initial Velocity");
+          target.initialPositions[i].printVector("\tInitial Position");
+          target.initialVelocities[i].printVector("\tInitial Velocity");
      }
 
      char input;
@@ -200,15 +201,13 @@ int main(int argc, char **argv)
 
 
      cout << endl
-          << "Loading configuration file located at " << inputDeckPath << endl;
+          << "Input file: " << inputDeckPath << endl;
      bool parseSuccessful = parseFile(inputDeckPath);
-     if (!parseSuccessful)
+     if (!parseSuccessful || !displayPrecheckInformation())
           cleanupAndExit(-1);
+
 
      presetIntegrators(target, control.dt);
-     if (!displayPrecheckInformation())
-          cleanupAndExit(-1);
-
      for (int i = 0; i < target.count; i++)
      {
           resizeVectors();

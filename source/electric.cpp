@@ -28,6 +28,11 @@ Vector3D PointCharge::getField(Vector3D position, double time) const
     return e;
 }
 
+string PointCharge::getDescription() const
+{
+    return "Point charge";
+}
+
 
 Vector3D ElectricDipole::getField(Vector3D position, double time) const
 {
@@ -36,4 +41,9 @@ Vector3D ElectricDipole::getField(Vector3D position, double time) const
 
     Vector3D factor = rCap * (3 * (rCap*dipoleMoment)) - dipoleMoment;
     return factor * (constants::k / pow(rFromDipole.amplitude(), 3));
+}
+
+string ElectricDipole::getDescription() const
+{
+    return "Electric Dipole";
 }

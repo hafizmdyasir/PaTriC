@@ -47,8 +47,7 @@ def import_file(path):
 
 def writeToTemp():
 
-    makedirs('temp', exist_ok=True)
-    with open('temp/config.dmp', 'w') as tempFile:
+    with open('config.dmp', 'w') as tempFile:
         
         tempFile.write("# CONTROL DICT\n")
         for (key, value) in Control.items():  # type: ignore

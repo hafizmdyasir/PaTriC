@@ -35,6 +35,8 @@ public:
     double getCharge() const { return charge; }
     Vector3D getPosition() const { return chargeLocation; }
 
+    string getDescription() const override;
+
     Vector3D getField(Vector3D position, double time) const override;
 };
 
@@ -51,6 +53,7 @@ public:
     Vector3D getDipoleMoment() const { return dipoleMoment; }
     Vector3D getPosition() const { return centerLocation; }
 
+    string getDescription() const override;
     Vector3D getField(Vector3D position, double time) const override;
 };
 

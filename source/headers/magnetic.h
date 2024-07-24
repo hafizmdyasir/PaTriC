@@ -42,6 +42,7 @@ public:
     int getDirection() const { return direction; }
     Vector3D getMidpoint() const { return midpoint; }
     
+    string getDescription() const override;
     Vector3D getField(Vector3D position, double time) const override;
 };
 
@@ -61,6 +62,7 @@ public:
     double getCoilCurrent() const { return current; }
     double getCoilRadius() const { return radius; }
 
+    string getDescription() const override;
     Vector3D getField(Vector3D position, double time) const override;
 
 };

@@ -93,3 +93,7 @@ Vector3D CustomGeometry::getField(Vector3D position, double time) const
     return result;
 }
 
+string CustomGeometry::getDescription() const
+{
+    return "Custom Python Function";
+}

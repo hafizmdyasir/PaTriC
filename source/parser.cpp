@@ -194,7 +194,7 @@ bool parseFile(string fullpath)
              << "The program encountered the above mentioned error and will now terminate... " << endl;
         return false;
     }
-    readFromDump("temp/config.dmp", dataDump);
+    readFromDump("config.dmp", dataDump);
     processDumpMap(dataDump);
     return true;
 }

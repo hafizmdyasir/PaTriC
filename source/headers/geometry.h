@@ -28,6 +28,7 @@ class Geometry
 {
 public:
     virtual ~Geometry() = default;
+    virtual string getDescription() const = 0;
     virtual Vector3D getField(Vector3D position, double time) const = 0;
 };
 
@@ -45,6 +46,11 @@ public:
     {
         return Vector3D(x, y, z);
     }
+
+    string getDescription() const
+    { 
+        return "Field = " + to_string(x) +" i + " + to_string(y) +" j + " + to_string(z) + " k";
+    }
 };
 
 
@@ -55,6 +61,8 @@ private:
     string functionName;
 public:
     CustomGeometry(const string& _fName);
+
+    string getDescription() const override;
     Vector3D getField(Vector3D position, double time) const override;
 };
 

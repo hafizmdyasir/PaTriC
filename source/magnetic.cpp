@@ -24,6 +24,11 @@ Vector3D MagneticWire::getField(Vector3D position, double time) const
     return Vector3D(0, 0, 0);
 }
 
+string MagneticWire::getDescription() const
+{
+    return "Magnetic Wire";
+}
+
 
 
 
@@ -66,4 +71,9 @@ Vector3D MagneticCoil::getField(Vector3D position, double time) const
         return onAxisField(position, this->zPosition, this->radius, this->current);
     else 
         return offAxisField(position, this->zPosition, this->radius, this->current);
+}
+
+string MagneticCoil::getDescription() const
+{
+    return "Magnetic Coil";
 }
