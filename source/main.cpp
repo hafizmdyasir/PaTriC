@@ -59,6 +59,7 @@ bool displayPrecheckInformation()
 
      cout << endl
           << "System Information\n"
+          << "Integration algorithm  : " << integrator_name << "\n"
           << "Number of iterations   : " << control.numIterations << "\n"
           << "Time step in seconds   : " << control.dt << "\n"
           << "End time of simulation : " << control.numIterations*control.dt << "\n";
@@ -72,9 +73,9 @@ bool displayPrecheckInformation()
 
      cout << endl
           << "Target Information\n"
-          << "Count  :  " << target.count << "\n"
+          << "Count  : " << target.count << "\n"
           << "Charge : " << target.charge << "\n"
-          << "Mass   :  " << target.mass << "\n";
+          << "Mass   : " << target.mass << "\n";
 
      for (int i = 0; i < target.count; i++)
      {
@@ -169,8 +170,8 @@ int findPythonScripts(char *deckpath)
      for(char character: path)
      {
           if (character == '\0') break;
-          if (character == ' ') execPath += "\\ ";
-          else execPath += character;
+          if (character == ' ') scriptsPath += "\\ ";
+          else scriptsPath += character;
      }
      
      return 0;
@@ -185,7 +186,7 @@ int main(int argc, char **argv)
           cout << endl
                << endl
                << "No configuration file specified. Program will exit." << endl;
-          return 404;
+          return 808;
      }
 
      if (findPythonScripts(argv[1]) != 0)
@@ -198,8 +199,14 @@ int main(int argc, char **argv)
 
      inputDeckPath = argv[1];
      cout << "\nInput file: " << inputDeckPath << endl;
+     if (!filesystem::exists(inputDeckPath))
+     {
+          cout << "The provided configuration file does not exist. Program will exit." << endl;
+          return 404;
+     }
 
-     bool parseSuccessful = parseFile(inputDeckPath);
+
+     bool parseSuccessful = parseFile();
      if (!parseSuccessful || !displayPrecheckInformation())
           cleanupAndExit(-1);
 

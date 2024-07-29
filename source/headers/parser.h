@@ -35,6 +35,6 @@ Parses the temp dump file for initializing system.
 using namespace std;
 
 
-bool parseFile(string fullpath);
+bool parseFile();
 
 #endif /* PARSER_H */

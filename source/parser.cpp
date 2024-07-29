@@ -182,10 +182,10 @@ void processDumpMap(unordered_map<string, string> &dataDump)
     initialize(control, particles, fields, out);
 }
 
-bool parseFile(string fullpath)
+bool parseFile()
 {
     unordered_map<string, string> dataDump;
-    string command = "python3 " + execPath + "/pyparser.py -f " + inputDeckPath;
+    string command = "python3 " + scriptsPath + "/pyparser.py -f " + inputDeckPath;
     int configRead = system(command.c_str());
     if (configRead != 0)
     {

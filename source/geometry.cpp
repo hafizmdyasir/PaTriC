@@ -41,6 +41,7 @@ Vector3D SinGeomtry::getField(Vector3D position, double time) const
             return Vector3D();
             break;
     }
+    return Vector3D();
 }
 
 
@@ -66,4 +67,5 @@ Vector3D GaussGeometry::getField(Vector3D position, double time) const
             return Vector3D();
             break;
     }
+    return Vector3D();
 }
