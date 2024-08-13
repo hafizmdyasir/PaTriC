@@ -24,8 +24,9 @@ Helper functions for plotting
 void saveData(vector<Vector3D>& positions, vector<Vector3D>& velocities, Output outInfo, float dt, int count)
 {
     
+    string completeFilePath = outputInfo.filePath + outputInfo.fileName + to_string(count) + ".dat";
     std::filesystem::create_directories(outputInfo.filePath.c_str());
-    ofstream dataFile(outputInfo.filePath + outputInfo.fileName + to_string(count) + ".dat");
+    ofstream dataFile(completeFilePath);
     
     // Write variable names at the top.
     dataFile << "# t\t";

@@ -133,13 +133,28 @@ void calculationLoop()
      overallTime += timeTaken;
 
      // When loop is finished, the last entry in gammas, efields, and bfields will not have been updated. Set them to nan.
-     gammas.at(control.numIterations) = NAN;
+     //gammas.at(control.numIterations) = NAN;
      efields.at(control.numIterations) = Vector3D(NAN, NAN, NAN);
      bfields.at(control.numIterations) = Vector3D(NAN, NAN, NAN);
      
      string timeTakenFormatted = formatDuration(timeTaken);
      cout << endl << fixed << setprecision(4)
           << "\tCalculation loop finished in " << timeTakenFormatted << ".\n";
+}
+
+void runParticleNumber(int number)
+{
+     cout << endl << "Particle number " << number+1;
+     resizeVectors();
+
+     currentGamma = 1 / sqrt(1 - target.initialV(number).squareAmp() / constants::c2);
+     velocities.at(0) = target.initialV(number)*currentGamma;
+     positions.at(0) = target.initialR(number);
+     gammas.at(0) = currentGamma;
+     calculationLoop();
+
+     cout << "\tSaving particle info...\n";
+     saveData(positions, velocities, outputInfo, control.dt, number);
 }
 
 void cleanupAndExit(int code)
@@ -183,17 +198,13 @@ int main(int argc, char **argv)
 
      if (argc < 2)
      {
-          cout << endl
-               << endl
-               << "No configuration file specified. Program will exit." << endl;
+          cout << "No configuration file specified. Program will exit." << endl;
           return 808;
      }
 
      if (findPythonScripts(argv[1]) != 0)
      {
-          cout << endl
-               << endl
-               << "Error with locating necessary python scripts. Program will exit." << endl;
+          cout << "Error with locating necessary python scripts. Program will exit." << endl;
           return 202;
      }
 
@@ -212,21 +223,7 @@ int main(int argc, char **argv)
 
      presetIntegrators(target, control.dt);
      for (int i = 0; i < target.count; i++)
-     {
-          resizeVectors();
-
-          cout << endl << "Particle number " << i+1;
-
-          currentGamma = 1 / sqrt(1 - target.initialV(i).squareAmp() / constants::c2);
-          velocities.at(0) = target.initialV(i)*currentGamma;
-          positions.at(0) = target.initialR(i);
-          gammas.at(0) = currentGamma;
-
-          calculationLoop();
-
-          cout << "\tSaving particle info...\n";
-          saveData(positions, velocities, outputInfo, control.dt, i);
-     }
+          runParticleNumber(i);
 
      cout << fixed << setprecision(4) << "\nTotal time for all particles: " << formatDuration(overallTime) << ".\n"; 
      if (outputInfo.dumpInfoFile)
@@ -234,6 +231,7 @@ int main(int argc, char **argv)
           cout << "Saving program run info..." << endl;
           saveInfo(outputInfo, control, target, overallTime.count());
      }
+     
      cleanupAndExit(0);
      return 0;
 }
