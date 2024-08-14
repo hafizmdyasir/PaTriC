@@ -68,7 +68,7 @@ class Uniform:
     
 
     def __str__(self) -> str:
-        return "Uniform" + f"({self.minimum[0], self.minimum[1], self.minimum[2], self.maximum[0], self.maximum[1], self.maximum[2]})"
+        return "Uniform" + f"{self.minimum[0], self.minimum[1], self.minimum[2], self.maximum[0], self.maximum[1], self.maximum[2]}"
     
     def __repr__(self) -> str:
         return self.__str__()
@@ -90,7 +90,7 @@ class Maxwellian:
     
 
     def __str__(self) -> str:
-        return f'Maxwellian({self.temperature[0], self.temperature[1], self.temperature[2]}'
+        return f'Maxwellian{self.temperature[0], self.temperature[1], self.temperature[2]}'
     
     def __repr__(self) -> str:
         return self.__str__()
