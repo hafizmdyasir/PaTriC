@@ -229,7 +229,7 @@ int main(int argc, char **argv)
      if (outputInfo.dumpInfoFile)
      {
           cout << "Saving program run info..." << endl;
-          saveInfo(outputInfo, control, target, overallTime.count());
+          saveInfo(outputInfo, control, target, formatDuration(overallTime));
      }
      
      cleanupAndExit(0);

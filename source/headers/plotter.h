@@ -30,7 +30,7 @@ using namespace std;
 
 
 void saveData(vector<Vector3D>& positions, vector<Vector3D>& velocities, Output outputInfo, float dt, int count);
-void saveInfo(Output outputInfo, Control control, Particles particles, float tt);
+void saveInfo(Output outputInfo, Control control, Particles particles, string tt);
 
 
 #endif /* PLOTTER_H */

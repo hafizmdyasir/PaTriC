@@ -104,7 +104,7 @@ void saveData(vector<Vector3D>& positions, vector<Vector3D>& velocities, Output 
     
 }
 
-void saveInfo(Output outputInfo, Control control, Particles particles, float tt)
+void saveInfo(Output outputInfo, Control control, Particles particles, string tt)
 {
     ofstream infoFile(outputInfo.filePath + outputInfo.fileName + "_info.inf");
     for (int j = 0; j < outputInfo.headers.size(); j++)
