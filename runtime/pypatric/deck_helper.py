@@ -118,7 +118,10 @@ def createFields(
     supportedMagFields = (Static, SinField, GaussField, Wire, Coil)
 
     # Validate inputs.
-    if isinstance(electricFields, Tuple):
+    if electricFields is None:
+        electricFields = tuple([])
+
+    elif isinstance(electricFields, Tuple):
         for e in electricFields:
             if type(e) not in supportedEleFields:
                 __showError(f'Electric field must be one of {supportedEleFields} or be a callable function.', 103)
@@ -126,8 +129,10 @@ def createFields(
         if len(signature(electricFields).parameters) != 4:
             __showError('Electric field as a function must take four parameters: x, y, z, and t.', 103)
 
-    
-    if isinstance(magneticFields, Tuple):
+    if magneticFields is None:
+        magneticFields = tuple([])
+
+    elif isinstance(magneticFields, Tuple):
         for b in magneticFields:
             if type(b) not in supportedMagFields:
                 __showError(f'Magnetic field must be one of {supportedMagFields} or be a callable function.', 103)

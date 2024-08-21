@@ -64,12 +64,19 @@ bool displayPrecheckInformation()
           << "Time step in seconds   : " << control.dt << "\n"
           << "End time of simulation : " << control.numIterations*control.dt << "\n";
 
-     cout << endl
-          << "Fields Information At Origin and t = 0\n";
-     for(auto& efg: fields.eFields)
-          cout << efg->getDescription() << "\n";
-     for(auto& bfg: fields.bFields)
-          cout << bfg->getDescription() << "\n";
+     if (fields.eFields.size() > 0 && fields.bFields.size() > 0)
+     {
+          cout << endl
+               << "Electric Fields Information\n";
+          for(auto& efg: fields.eFields)
+               cout << efg->getDescription() << "\n";
+
+          cout << endl
+               << "Magnetic Fields Information\n";
+          for(auto& bfg: fields.bFields)
+               cout << bfg->getDescription() << "\n";
+     }
+     else cout << endl << "No Fields Specified\n";
 
      cout << endl
           << "Target Information\n"
