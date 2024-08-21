@@ -19,9 +19,9 @@ Serves as the base file and more geometries are defined in files electric.py and
 
 
 
-from typing import Literal
+from typing import Literal, Dict
 
-variablesDictionary = {'T': 0, 'X': 1, 'Y': 2, 'Z': 3}  
+variablesDictionary: Dict[str, int] = {'T': 0, 'X': 1, 'Y': 2, 'Z': 3}  
 
 
 
@@ -125,7 +125,7 @@ class SinField:
     Represents an electric/magnetic field that varies sinusodially in either time, x, y, or z. 
     That is, the field will be calculated as f = sin(omega*variable + phi)
     '''
-    def __init__(self, variable: Literal['X', 'Y', 'Z', 'T'], omega: float, phi: float = 0):
+    def __init__(self, variable: Literal['X', 'Y', 'Z', 'T'], direction: Literal['X' 'Y', 'Z'], amp: float, omega: float, phi: float = 0):
         '''
         Parameters
         ----------
@@ -134,11 +134,13 @@ class SinField:
         phi: The phase of the field (if any).
         '''  
         self.variable = variablesDictionary[variable]
+        self.direction = variablesDictionary[direction]
+        self.amplitude = amp
         self.omega = omega
         self.phi = phi
 
     def __str__(self) -> str:
-        return f'SinField({self.variable}, {self.omega}, {self.phi})'
+        return f'SinField({self.variable}, {self.direction}, {self.amplitude}, {self.omega}, {self.phi})'
     
     def __repr__(self) -> str:
         return self.__str__()
@@ -150,24 +152,25 @@ class GaussField:
     The field will be calculated as f = a * exp( ((variable-b) / c)**m)
     The default value for m is 2. Support is provided for other powers.
     '''
-    def __init__(self, variable: Literal['X', 'Y', 'Z', 'T'], a: float, b: float, c: float, m: float = 2):
+    def __init__(self, variable: Literal['X', 'Y', 'Z', 'T'], direction: Literal['X' 'Y', 'Z'], a: float, b: float, c: float, m: float = 2):
         '''
         Parameters
         ----------
         variable: The variable in which, the field varies.
         a: The amplitude of the field.
-        b: The mean of the field.
-        c: The standard deviation of the field.
+        b: The center of the field.
+        c: The fwhm of the field.
         m: Optional parameter to provide support for Super Gauss functions.
         '''
         self.variable = variablesDictionary[variable]
-        self.a = a
-        self.b = b
-        self.c = c
+        self.direction = variablesDictionary[direction]
+        self.amp = a
+        self.center = b
+        self.fwhm = c
         self.m = m
 
     def __str__(self) -> str:
-        return f'GaussField({self.variable}, {self.a}, {self.b}, {self.c}, {self.m})'
+        return f'GaussField({self.variable}, {self.direction}, {self.amp}, {self.center}, {self.fwhm}, {self.m})'
     
     def __repr__(self) -> str:
         return self.__str__()

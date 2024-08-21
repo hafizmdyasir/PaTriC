@@ -17,55 +17,49 @@ Definitions for the geometry header
 #include "headers/geometry.h"
 
 
-Vector3D SinGeomtry::getField(Vector3D position, double time) const
-{
-    switch (variable)
-    {
-        case 't':
-            break;
-            
-        case 'X':
-        case 'x':
-
-            break;
-        case 'Y':
-        case 'y':
-
-            break;
-
-        case 'Z':
-        case 'z':
-
-            break;
-        default:
-            return Vector3D();
-            break;
-    }
-    return Vector3D();
-}
-
-
 
 Vector3D GaussGeometry::getField(Vector3D position, double time) const
 {
+    long double input;
     switch (variable)
     {
-        case T:
-            break;
-            
-        case X:
+    case 0:
+    default:
+        input = time;
+        break;
 
-            break;
-        case Y:
-
-            break;
-
-        case Z:
-
-            break;
-        default:
-            return Vector3D();
-            break;
+    case X:
+    case Y:
+    case Z:
+        input = position[variable];
+        break;
     }
-    return Vector3D();
+
+    long double magnitude = amp * exp(-pow((input-center)/fwhm, power));
+    Vector3D field(0,0,0);
+    field[direction] = magnitude;
+    return field;
+}
+
+Vector3D SinGeometry::getField(Vector3D position, double time) const
+{
+    long double input;
+    switch (variable)
+    {
+    case 0:
+    default:
+        input = time;
+        break;
+
+    case X:
+    case Y:
+    case Z:
+        input = position[variable];
+        break;
+    }
+
+    long double magnitude = amplitude * sin(frequency*input + phase);
+    Vector3D field(0,0,0);
+    field[direction] = magnitude;
+    return field;
 }

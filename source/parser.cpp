@@ -140,6 +140,10 @@ Fields processFields(unordered_map<string, string> &dataDump)
                 bFieldGeometries.push_back(new StaticGeometry(params[0], params[1], params[2]));
             else if (name == "Coil")
                 bFieldGeometries.push_back(new MagneticCoil(params[0], params[1], params[2]));
+            else if (name == "SinField")
+                bFieldGeometries.push_back(new SinGeometry(params[0], params[1], params[2], params[3], params[4]));
+            else if (name == "GaussField")
+                bFieldGeometries.push_back(new GaussGeometry(params[0], params[1], params[2], params[3], params[4], params[5]));
         }
     }
 
@@ -157,6 +161,10 @@ Fields processFields(unordered_map<string, string> &dataDump)
             vector<float> params = geometry.parameters;
             if (name == "Static")
                 eFieldGeometries.push_back(new StaticGeometry(params[0], params[1], params[2]));
+            else if (name == "SinField")
+                eFieldGeometries.push_back(new SinGeometry(params[0], params[1], params[2], params[3], params[4]));
+            else if (name == "GaussField")
+                eFieldGeometries.push_back(new GaussGeometry(params[0], params[1], params[2], params[3], params[4], params[5]));
         }
     }
 
