@@ -18,7 +18,7 @@ Used to initialize particles' positions and velocities in different forms.
 
 #include "headers/initializer.h"
 
-vector<double> generateMaxwellian(double T, double m, int n)
+vector<double> generateMaxwellian(double temperature, double m, int n)
 {
     vector<double> result;
     result.resize(n);
@@ -27,7 +27,7 @@ vector<double> generateMaxwellian(double T, double m, int n)
     mt19937 gen(rd());
     uniform_real_distribution<> dis(0.0, 1.0);
     
-    double sigma = sqrt(constants::k_B*T/m);
+    double sigma = sqrt(constants::k_B*temperature/m);
 
     for (int i = 0; i < n; ++i) {
         // Generate Gaussian-distributed numbers using Box-Muller transform

@@ -23,7 +23,7 @@ Vector3D GaussGeometry::getField(Vector3D position, double time) const
     long double input;
     switch (variable)
     {
-    case 0:
+    case T:
     default:
         input = time;
         break;
@@ -46,7 +46,7 @@ Vector3D SinGeometry::getField(Vector3D position, double time) const
     long double input;
     switch (variable)
     {
-    case 0:
+    case T:
     default:
         input = time;
         break;

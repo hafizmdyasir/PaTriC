@@ -21,6 +21,51 @@ Contains only constants
 #include <string>
 #include <math.h>
 
+#define T 0    // Key that represents time.
+#define X 1    // Key for accessing X component of Vector3D object
+#define Y 2    // Key for accessing Y component of Vector3D object
+#define Z 3    // Key for accessing Z component of Vector3D object
+
+// CONTROL KEYS
+#define TIME_STEP "dt"
+#define NUM_ITERS "num_iters"
+#define INTEGRATOR "integerator"
+#define READOUT_FREQ "readout_freq"
+
+// PARTICLE KEYS
+#define MASS "mass"
+#define CHARGE "charge"
+#define PARTICLE_COUNT "particle_count"
+#define INITIAL_POSITION "initial_position"
+#define INITIAL_VELOCITY "initial_velocity"
+
+// FIELDS KEYS
+#define E_FIELD "e_field"
+#define B_FIELD "b_field"
+
+// OUTPUT KEYS
+#define FILENAME "f_name"
+#define FILEPATH "f_path"
+#define FILE_HEADER "f_header"
+#define DUMP_INFO_FILE "dump_info_file"
+#define DUMP_VARIABLES "dump_variables"
+
+// DUMP VARIABLES
+#define POS_X "position_x"
+#define POS_Y "position_y"
+#define POS_Z "position_z"
+
+#define VEL_X "velocity_x"
+#define VEL_Y "velocity_y"
+#define VEL_Z "velocity_z"
+
+#define GAMMA "gamma"
+#define E_FIELD_X "e_field_x"
+#define E_FIELD_Y "e_field_y"
+#define E_FIELD_Z "e_field_z"
+#define B_FIELD_X "b_field_x"
+#define B_FIELD_Y "b_field_y"
+#define B_FIELD_Z "b_field_z"
 
 using namespace std;
 
@@ -30,7 +75,7 @@ struct constants
     static constexpr long double k_B = 1.38064852e-23;
 
     // Speed of light
-    static constexpr long double c = 299792458;//137.035999084;
+    static constexpr long double c = 299792458;
 
     // Speed of light squared
     static constexpr long double c2 = c*c;
@@ -50,59 +95,6 @@ struct constants
     // Force constant for Coulomb force
     static constexpr long double k = 8.987551787368e9;
 };
-
-// Key that represents time.
-const int T = 0;
-// Key for accessing X component of Vector3D object
-const int X = 1;
-// Key for accessing Y component of Vector3D object
-const int Y = 2;
-// Key for accessing Z component of Vector3D object
-const int Z = 3;
-
-
-// CONTROL KEYS
-const string TIME_STEP = "dt";
-const string NUM_ITERS = "num_iters";
-const string INTEGRATOR = "integerator";
-const string READOUT_FREQ = "readout_freq";
-
-// PARTICLE KEYS
-const string MASS = "mass";
-const string CHARGE = "charge";
-const string PARTICLE_COUNT = "particle_count";
-const string INITIAL_POSITION = "initial_position";
-const string INITIAL_VELOCITY = "initial_velocity";
-
-
-// FIELDS KEYS
-const string E_FIELD = "e_field";
-const string B_FIELD = "b_field";
-
-
-// OUTPUT KEYS
-const string FILENAME = "f_name";
-const string FILEPATH = "f_path";
-const string FILE_HEADER = "f_header";
-const string DUMP_INFO_FILE = "dump_info_file";
-const string DUMP_VARIABLES = "dump_variables";
-
-// DUMP VARIABLES
-const string POS_X = "position_x";
-const string POS_Y = "position_y";
-const string POS_Z = "position_z";
-
-const string VEL_X = "velocity_x";
-const string VEL_Y = "velocity_y";
-const string VEL_Z = "velocity_z";
-
-const string GAMMA = "gamma";
-const string E_FIELD_X = "e_field_x";
-const string E_FIELD_Y = "e_field_y";
-const string E_FIELD_Z = "e_field_z";
-const string B_FIELD_X = "b_field_x";
-const string B_FIELD_Y = "b_field_y";
-const string B_FIELD_Z = "b_field_z";
 
 
 #endif // CONSTANTS_H

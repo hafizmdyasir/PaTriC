@@ -15,7 +15,7 @@ Dedicated descriptor file for Vector3D only.
 */
 
 #include "headers/vector3d.h"
-
+#define sgn(x) ((x < 0) ? "-" : "+") 
 
 
 
@@ -92,5 +92,8 @@ long double Vector3D::squareAmp()
 void Vector3D::printVector(string name)
 {
     cout << endl << scientific
-         << name << " = " << this->to_string();
+         << name << " = " 
+         << sgn(this -> v1) << "" << abs(this -> v1) << " i " 
+         << sgn(this -> v2) << " " << abs(this -> v2) << " j "
+         << sgn(this -> v3) << " " << abs(this -> v3) << " k ";
 }

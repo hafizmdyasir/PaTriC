@@ -174,22 +174,25 @@ void cleanupAndExit(int code)
      exit(code);
 }
 
-int findPythonScripts(char *deckpath)
+int findPythonScripts()
 {
-     char path[PATH_MAX];
-     ssize_t count = readlink("/proc/self/exe", path, PATH_MAX);
+     // Get the present working path.
+     char workingPath[PATH_MAX];
+     ssize_t count = readlink("/proc/self/exe", workingPath, PATH_MAX);
      if (count == -1) {
           perror("readlink");
           return 1;
      }
-     path[count] = '\0';
+     workingPath[count] = '\0';
 
-     char *last_slash = strrchr(path, '/');
+     // Find the directory from the present working path. This is the directory where the patric executable is situated.
+     char *last_slash = strrchr(workingPath, '/');
      if (last_slash != NULL) {
           *last_slash = '\0';
      }
 
-     for(char character: path)
+     // Set the path to the scripts, making sure that blank spaces are replaced with the escape sequence '\ '.
+     for(char character: workingPath)
      {
           if (character == '\0') break;
           if (character == ' ') scriptsPath += "\\ ";
@@ -209,7 +212,7 @@ int main(int argc, char **argv)
           return 808;
      }
 
-     if (findPythonScripts(argv[1]) != 0)
+     if (findPythonScripts())
      {
           cout << "Error with locating necessary python scripts. Program will exit." << endl;
           return 202;
