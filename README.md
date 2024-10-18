@@ -2,7 +2,7 @@
 > By Mohammad Yasir
 
 ## About PaTriC
-**PaTriC** is an open-source, user-friendly, fully relativistic charged particle tracking code that can simulate the motion of any number of particles in certain electric and magnetic fields.
+**PaTriC** is an open-source, user-friendly, fully relativistic charged particle tracking code that can simulate the motion of any number of particles in certain electric and magnetic fields. Learn more at the [Official Documentation](https://hafizmdyasir.github.io/patric-user-manual/)
 
 PaTriC utilizes the particle orbit theory and ignores inter-particle interactions, making it suitable for simulating the expected behaviour of plasma particles by showcasing how isolated particles will behave.
 
