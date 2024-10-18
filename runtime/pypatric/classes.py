@@ -15,14 +15,13 @@ Classes that represent various types of electric and magnetic field geometries.
 Serves as the base file and more geometries are defined in files electric.py and magnetic.py
 '''
 
-
-
-
-
 from typing import Literal, Dict
 
-variablesDictionary: Dict[str, int] = {'T': 0, 'X': 1, 'Y': 2, 'Z': 3}  
-
+variablesDictionary: Dict[str, int] = {
+    'T': 0, 't': 0, 'time': 0,
+    'X': 1, 'Y': 2, 'Z': 3,
+    'x': 1, 'y': 2, 'z': 3,
+}
 
 
 class Random:

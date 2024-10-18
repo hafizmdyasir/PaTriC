@@ -96,5 +96,4 @@ struct constants
     static constexpr long double k = 8.987551787368e9;
 };
 
-
 #endif // CONSTANTS_H

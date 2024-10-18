@@ -26,6 +26,24 @@ Contains a geometry class that can be overriden.
 /// @brief Virtual class that will be overriden by all field geometries.
 class Geometry
 {
+protected:
+    static string str(int x)
+    {
+        switch (x)
+        {
+        case 0:
+        default:
+            return "time";
+        
+        case 1:
+            return "x";
+        case 2:
+            return "y";
+        case 3:
+            return "z";
+        }
+    }
+
 public:
     virtual ~Geometry() = default;
     virtual string getDescription() const = 0;
@@ -65,7 +83,7 @@ public:
     SinGeometry(int _var, int _dir, double _amp, double _freq, double _phi)
         : variable(_var), direction(_dir), amplitude(_amp), frequency(_freq), phase(_phi) {}
 
-    string getDescription() const { return "Sinusoidal in " + variable; }
+    string getDescription() const { return "Sinusoidal in " + str(variable); }
 
     Vector3D getField(Vector3D position, double time) const override;
 };
@@ -81,7 +99,7 @@ public:
     GaussGeometry(int _var, int _dir, double _amp, double _ctr, double _fwhm, double _pow)
         : amp(_amp), center(_ctr), fwhm(_fwhm), power(_pow), variable(_var), direction(_dir) {}
 
-    string getDescription() const { return "Gaussian in " + variable; }
+    string getDescription() const { return "Gaussian in " + str(variable); }
 
     Vector3D getField(Vector3D position, double time) const override;
 };

@@ -17,7 +17,7 @@ Contains classes that describe electric field geometries
 
 # The static class is already defined for positions and velocities. 
 # We just need it here to make the file complete.
-from classes import Static, SinField, GaussField
+from codecat_pypatric.classes import Static, SinField, GaussField
 
 
 class PointCharge:
