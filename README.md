@@ -4,7 +4,7 @@
 ## About PaTriC
 **PaTriC** is an open-source, user-friendly, fully relativistic charged particle tracking code that can simulate the motion of any number of particles in arbitrary electric and magnetic fields. Learn more at the [Official Documentation](https://hafizmdyasir.github.io/PaTriC/)
 
-PaTriC ignores inter-particle interactions, making it suitable for simulating the expected behaviour of plasma particles by showcasing how isolated particles will behave. The particular update is multi-threaded, making the performance blazingly fast on modern HPC systems.
+PaTriC ignores inter-particle interactions, making it suitable for simulating the expected behaviour of plasma particles by showcasing how isolated particles will behave. The particle update is multi-threaded, making the performance blazingly fast on modern HPC systems.
 
 ## Code Structure
 The core components of PaTriC are written entirely in C++ and the input script is also provided in C++. The program stores the compiler and flags that were used to compile it and reuses them to compile the input script into a shared library. This maximizes speed and safety and reduces chances of incorrect input.
