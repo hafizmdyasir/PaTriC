@@ -1,7 +1,4 @@
-/.vscode
-/__pycache__
-/plotters/
-/runtime/patric
-/runtime/__pycache__
-*.gch
-*.pyc
+build
+benchmarks/internal_testing
+.vscode
+.cache

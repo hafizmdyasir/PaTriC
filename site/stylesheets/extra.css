@@ -1,0 +1,54 @@
+/* Light theme */
+[data-md-color-scheme="default"] .md-typeset :not(pre)>code {
+  color: #003049;
+  background-color: #efefef;
+}
+
+/* Dark theme */
+[data-md-color-scheme="slate"] .md-typeset :not(pre)>code {
+  color: #bbd9ed;
+  background-color: #262626;
+}
+
+.header-image {
+    width: 60%;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    border-radius: 12px;
+}
+
+[data-md-color-scheme="default"] .dark-image {
+    display: none;
+}
+
+[data-md-color-scheme="default"] .light-image {
+    background: #efefef
+}
+
+[data-md-color-scheme="slate"] .dark-image {
+    background: #262626
+}
+
+[data-md-color-scheme="slate"] .light-image {
+    display: none;
+}
+
+/* Light theme */
+[data-md-color-scheme="default"] .md-typeset table thead {
+    background-color: #dbeafe;
+    color: #1e3a8a;
+}
+
+/* Dark theme */
+[data-md-color-scheme="slate"] .md-typeset table thead {
+    background-color: #1e3a5f;
+    color: #ffffff;
+}
+
+/* Header cells */
+.md-typeset table thead th {
+    background-color: inherit;
+    color: inherit;
+    font-weight: 700;
+}

@@ -1,0 +1,1164 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Mohammad Yasir">
+      
+      
+        <link rel="canonical" href="https://www.github.com/PaTriC/input/">
+      
+      
+      
+        <link rel="prev" href="../installation/">
+      
+      
+        <link rel="next" href="../units/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="zensical-0.0.70">
+    
+    
+      
+        <title>The Input File - PaTriC Documentation</title>
+      
+    
+    
+      
+        
+      
+      <link rel="stylesheet" href="../assets/stylesheets/modern/main.e442bf79.min.css">
+      
+        
+          
+        
+        <link rel="stylesheet" href="../assets/stylesheets/modern/palette.b60ce83d.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,500,500i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_scope.pathname.endsWith("/")||(__md_scope=new URL(__md_scope.pathname+"/",location)),__md_hash=e=>[...e].reduce(((e,t)=>(e<<5)-e+t.charCodeAt(0)),0),__md_get=(e,t=localStorage,_=__md_scope)=>JSON.parse(t.getItem(_.pathname+"."+e)),__md_set=(e,t,_=localStorage,a=__md_scope)=>{try{_.setItem(a.pathname+"."+e,JSON.stringify(t))}catch(e){}},document.documentElement.setAttribute("data-platform",navigator.platform)</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer" aria-hidden="true"></label>
+    <div data-md-component="skip">
+      <a href="#__skip" class="md-skip">
+        Skip to content
+      </a>
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="./.." title="PaTriC Documentation" class="md-header__button md-logo" aria-label="PaTriC Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 5v16M20.001 19A2 2 0 0 0 22 17V5a2 2 0 0 0-1.999-2L16 3.002A5 5 0 0 0 12 5a5 5 0 0 0-4-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 1.999 2H8a5 5 0 0 1 4 2 5 5 0 0 1 4-2z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer" aria-label="Navigation">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-menu" viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            PaTriC Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              The Input File
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun-moon" viewBox="0 0 24 24"><path d="M12 2v2M14.837 16.385a6 6 0 1 1-7.223-7.222c.624-.147.97.66.715 1.248a4 4 0 0 0 5.26 5.259c.589-.255 1.396.09 1.248.715M16 12a4 4 0 0 0-4-4M19 5l-1.256 1.256M20 12h2"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search" aria-label="Search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog" aria-label="Search">
+  <button type="button" class="md-search__button">
+    Search
+  </button>
+</div>
+      
+    
+    <div class="md-header__source">
+      
+        <a href="https://github.com/hafizmdyasir/PaTriC" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2026 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    hafizmdyasir/PaTriC
+  </div>
+</a>
+      
+    </div>
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="./.." title="PaTriC Documentation" class="md-nav__button md-logo" aria-label="PaTriC Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 5v16M20.001 19A2 2 0 0 0 22 17V5a2 2 0 0 0-1.999-2L16 3.002A5 5 0 0 0 12 5a5 5 0 0 0-4-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 1.999 2H8a5 5 0 0 1 4 2 5 5 0 0 1 4-2z"/></svg>
+
+    </a>
+    PaTriC Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/hafizmdyasir/PaTriC" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2026 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    hafizmdyasir/PaTriC
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="./.." class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-home" viewBox="0 0 24 24"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  Introduction
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-download" viewBox="0 0 24 24"><path d="M12 15V3M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  Installation
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-code" viewBox="0 0 24 24"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  Input Script
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="././" class="md-nav__link md-nav__link--active">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-code" viewBox="0 0 24 24"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  Input Script
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#control" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Control
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#particle" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Particle
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Particle">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#loading-initial-conditions" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Loading Initial Conditions
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Loading Initial Conditions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#getsameic" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>getSameIC()</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getrandomic" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>getRandomIC()</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getregularic" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>getRegularIC()</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getmaxwellianic" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>getMaxwellianIC()</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Fields
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fields">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inbuilt-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Inbuilt Fields
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Inbuilt Fields">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#getconstantfield" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>getConstantField()</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getsinefield" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>getSineField()</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getgaussianfield" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>getGaussianField()</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Custom Fields
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#output" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Output
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../units/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-scale" viewBox="0 0 24 24"><path d="M12 3v18M19 8l3 8a5 5 0 0 1-6 0zV7"/><path d="M3 7h1a17 17 0 0 0 8-2 17 17 0 0 0 8 2h1M5 8l3 8a5 5 0 0 1-6 0zV7M7 21h10"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  Units
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../parallelize/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-cpu" viewBox="0 0 24 24"><path d="M12 20v2M12 2v2M17 20v2M17 2v2M2 12h2M2 17h2M2 7h2M20 12h2M20 17h2M20 7h2M7 20v2M7 2v2"/><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="8" height="8" x="8" y="8" rx="1"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  Parallelization
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../benchmarks/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-bar-chart-2" viewBox="0 0 24 24"><path d="M5 21v-6M12 21V3M19 21V9"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  Benchmarks
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  
+                    
+                    
+                    
+                      
+                    
+                    
+                      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+                      <div class="md-sidebar-button__wrapper">
+                        <label class="md-sidebar-button" for="__toc"></label>
+                      </div>
+                    
+                  
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#control" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Control
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#particle" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Particle
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Particle">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#loading-initial-conditions" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Loading Initial Conditions
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Loading Initial Conditions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#getsameic" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>getSameIC()</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getrandomic" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>getRandomIC()</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getregularic" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>getRegularIC()</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getmaxwellianic" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>getMaxwellianIC()</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Fields
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fields">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inbuilt-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Inbuilt Fields
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Inbuilt Fields">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#getconstantfield" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>getConstantField()</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getsinefield" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>getSineField()</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getgaussianfield" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        <code>getGaussianField()</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Custom Fields
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#output" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Output
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+              
+              <article class="md-content__inner md-typeset">
+                <a id="__skip" tabindex="-1"></a>
+                
+                  
+
+  
+  
+
+
+<h1 id="structure">Structure<a class="headerlink" href="#structure" title="Permanent link">&para;</a></h1>
+<p>PaTriC uses C++ to setup your simulation. Example <code>input.cpp</code> and various benchmark files ship with the repository that you can copy and adjust for your use case.</p>
+<p>When the program starts, it compiles the input file provided using the <em>same</em> compiler and compiler flags that were used to compile PaTriC itself. The input file must include the header <code>patric.h</code> that is installed with the program binary when you do <code>make install</code>.</p>
+<p>The program then looks for a function called <code>configureSimulation</code> in the input file and calls it to set up the parameters of the simulation. This function takes various arguments, which are explained in the following sections. Overall, the function looks like so:
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">configureSimulation</span><span class="p">(</span><span class="n">Control</span><span class="o">*&amp;</span><span class="w"> </span><span class="n">ctrl</span><span class="p">,</span><span class="w"> </span><span class="n">Particle</span><span class="o">*&amp;</span><span class="w"> </span><span class="n">prtcl</span><span class="p">,</span><span class="w"> </span><span class="n">Fields</span><span class="o">*&amp;</span><span class="w"> </span><span class="n">fields</span><span class="p">,</span><span class="w"> </span><span class="n">Output</span><span class="o">*&amp;</span><span class="w"> </span><span class="n">output</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="c1">// do stuff you need, define variables etc.</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="n">ctrl</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Control</span><span class="p">(</span><span class="n">timestep</span><span class="p">,</span><span class="w"> </span><span class="n">simulationTime</span><span class="p">,</span><span class="w"> </span><span class="n">particlePusher</span><span class="p">);</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="n">prtcl</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Particle</span><span class="p">(</span><span class="n">count</span><span class="p">,</span><span class="w"> </span><span class="n">charge</span><span class="p">,</span><span class="w"> </span><span class="n">mass</span><span class="p">,</span><span class="w"> </span><span class="n">initialPositions</span><span class="p">,</span><span class="w"> </span><span class="n">initialVelocities</span><span class="p">);</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="n">fields</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Fields</span><span class="p">(</span><span class="n">electricFieldFunction</span><span class="p">,</span><span class="w"> </span><span class="n">magneticFieldFunction</span><span class="p">);</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="n">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Output</span><span class="p">(</span><span class="n">outputFileName</span><span class="p">,</span><span class="w"> </span><span class="n">outputFilePath</span><span class="p">,</span><span class="w"> </span><span class="n">outputFrequency</span><span class="p">,</span><span class="w"> </span><span class="n">outputVariables</span><span class="p">);</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="p">}</span>
+</span></code></pre></div></p>
+<h2 id="control">Control<a class="headerlink" href="#control" title="Permanent link">&para;</a></h2>
+<p>The Control class contains information relevant to the setup of the simulation itself. This includes just three things:</p>
+<ol>
+<li><code>timestep</code>: the time-step used by the integration algorithm.</li>
+<li><code>simulationTime</code>: time till which the simulation will run for.</li>
+<li><code>particlePusher</code>: the particle push algorithm to use. This must be either of <code>Pusher::Boris</code> <a href="#reference-boris">[2]</a>, <code>Pusher::Vay</code> <a href="#reference-vay">[3]</a>, or <code>Pusher::HigueraCary</code> <a href="#reference-hig">[4]</a>. A comparison of each of these algorithms is given in reference <a href="#reference-integrator">[1]</a>.</li>
+</ol>
+<p>With the above variables, the control object is then initialized like so:
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">ctrl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Control</span><span class="p">(</span><span class="mf">0.001</span><span class="p">,</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w"> </span><span class="n">Pusher</span><span class="o">::</span><span class="n">Boris</span><span class="p">);</span>
+</span></code></pre></div></p>
+<h2 id="particle">Particle<a class="headerlink" href="#particle" title="Permanent link">&para;</a></h2>
+<p>This is a simple container for the target information. This includes:</p>
+<ol>
+<li><code>count</code>: the number of particles to load and simulate.</li>
+<li><code>charge</code>: the charge of the particle (in units of electron charge, see <a href="../units/">Units</a>).</li>
+<li><code>mass</code>: the mass of the particle (again in units of electron mass).</li>
+<li><code>initialPositions</code>: the initial position of each of the particles.</li>
+<li><code>initialVelocities</code>: the initial velocities of each of the particles.</li>
+</ol>
+<h3 id="loading-initial-conditions">Loading Initial Conditions<a class="headerlink" href="#loading-initial-conditions" title="Permanent link">&para;</a></h3>
+<p>The <code>Particle()</code> constructor expects <code>std::vectors</code> of <code>Vector3D</code> objects for the <code>initialPositions</code> and <code>initialVelocities</code>. For example, initialising a single particle at the origin with zero velocity looks like this:
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">prtcl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Particle</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">Vector3D</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)},</span><span class="w"> </span><span class="p">{</span><span class="n">Vector3D</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)});</span>
+</span></code></pre></div></p>
+<p>For a large number of particles, creating the vectors manually becomes cumbersome. The PaTriC header <code>patric.h</code> provides a few helpful functions to tackle this. They are outlined below:</p>
+<h4 id="getsameic"><code>getSameIC()</code><a class="headerlink" href="#getsameic" title="Permanent link">&para;</a></h4>
+<p>Returns a vector containg the same values for all particles, which is to be provided as a <code>Vector3D</code> object. For example, to initialise 10 particles at the same position and velocity, you can do the following:</p>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">particleCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kt">int</span><span class="w"> </span><span class="n">particleCharge</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">-1.0</span><span class="p">;</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="kt">int</span><span class="w"> </span><span class="n">particleMass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="p">;</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="n">prtcl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Particle</span><span class="p">(</span><span class="n">particleCount</span><span class="p">,</span><span class="w"> </span><span class="n">particleCharge</span><span class="p">,</span><span class="w"> </span><span class="n">particleMass</span><span class="p">,</span><span class="w"> </span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">        </span><span class="c1">//x,y,z are the position coordinates.</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">        </span><span class="n">getSameIC</span><span class="p">(</span><span class="n">particleCount</span><span class="p">,</span><span class="w"> </span><span class="n">Vector3D</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">)),</span><span class="w">      </span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">        </span><span class="c1">// vx,vy,vz are the velocity components.</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">        </span><span class="n">getSameIC</span><span class="p">(</span><span class="n">particleCount</span><span class="p">,</span><span class="w"> </span><span class="n">Vector3D</span><span class="p">(</span><span class="n">vx</span><span class="p">,</span><span class="w"> </span><span class="n">vy</span><span class="p">,</span><span class="w"> </span><span class="n">vz</span><span class="p">))</span><span class="w">  </span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">    </span><span class="p">);</span>
+</span></code></pre></div>
+<h4 id="getrandomic"><code>getRandomIC()</code><a class="headerlink" href="#getrandomic" title="Permanent link">&para;</a></h4>
+<p>Returns a vector of initial conditions, where each component has been randomly drawn from a uniform distribution between the provided limits.</p>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">prtcl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Particle</span><span class="p">(</span><span class="n">particleCount</span><span class="p">,</span><span class="w"> </span><span class="n">particleCharge</span><span class="p">,</span><span class="w"> </span><span class="n">particleMass</span><span class="p">,</span><span class="w"> </span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">        </span><span class="c1">// Each particle gets a random position with components between the provided values.</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">        </span><span class="n">getRandomIC</span><span class="p">(</span><span class="n">particleCount</span><span class="p">,</span><span class="w"> </span><span class="n">xmin</span><span class="p">,</span><span class="w"> </span><span class="n">xmax</span><span class="p">,</span><span class="w"> </span><span class="n">ymin</span><span class="p">,</span><span class="w"> </span><span class="n">ymax</span><span class="p">,</span><span class="w"> </span><span class="n">zmin</span><span class="p">,</span><span class="w"> </span><span class="n">zmax</span><span class="p">),</span><span class="w">             </span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">        </span><span class="c1">// For either of the directions, if upper and lower values are equal, the same value is assigned.</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">        </span><span class="n">getRandomIC</span><span class="p">(</span><span class="n">particleCount</span><span class="p">,</span><span class="w"> </span><span class="n">vx_min</span><span class="p">,</span><span class="w"> </span><span class="n">vx_max</span><span class="p">,</span><span class="w"> </span><span class="n">vy_min</span><span class="p">,</span><span class="w"> </span><span class="n">vy_max</span><span class="p">,</span><span class="w"> </span><span class="n">vz_min</span><span class="p">,</span><span class="w"> </span><span class="n">vz_max</span><span class="p">)</span><span class="w"> </span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="p">);</span><span class="w">      </span>
+</span></code></pre></div>
+<h4 id="getregularic"><code>getRegularIC()</code><a class="headerlink" href="#getregularic" title="Permanent link">&para;</a></h4>
+<p>Returns a vector where each component has been uniformly distributed between the provided limits. </p>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">prtcl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Particle</span><span class="p">(</span><span class="n">particleCount</span><span class="p">,</span><span class="w"> </span><span class="n">particleCharge</span><span class="p">,</span><span class="w"> </span><span class="n">particleMass</span><span class="p">,</span><span class="w"> </span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">        </span><span class="n">getRegularIC</span><span class="p">(</span><span class="n">particleCount</span><span class="p">,</span><span class="w"> </span><span class="n">xmin</span><span class="p">,</span><span class="w"> </span><span class="n">xmax</span><span class="p">,</span><span class="w"> </span><span class="n">ymin</span><span class="p">,</span><span class="w"> </span><span class="n">ymax</span><span class="p">,</span><span class="w"> </span><span class="n">zmin</span><span class="p">,</span><span class="w"> </span><span class="n">zmax</span><span class="p">),</span><span class="w">            </span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">        </span><span class="n">getRegularIC</span><span class="p">(</span><span class="n">particleCount</span><span class="p">,</span><span class="w"> </span><span class="n">vx_min</span><span class="p">,</span><span class="w"> </span><span class="n">vx_max</span><span class="p">,</span><span class="w"> </span><span class="n">vy_min</span><span class="p">,</span><span class="w"> </span><span class="n">vy_max</span><span class="p">,</span><span class="w"> </span><span class="n">vz_min</span><span class="p">,</span><span class="w"> </span><span class="n">vz_max</span><span class="p">)</span><span class="w"> </span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="p">);</span><span class="w">  </span><span class="c1">// Particles are spread evenly across the three-dimensional space.</span>
+</span></code></pre></div>
+<h4 id="getmaxwellianic"><code>getMaxwellianIC()</code><a class="headerlink" href="#getmaxwellianic" title="Permanent link">&para;</a></h4>
+<p>It is also possible to get a vector of values that are spread with a given temperature. This depends on the particle mass and a Box-Muller transform is used to return thermally spread values centered on 0.
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Vector3D</span><span class="o">&gt;</span><span class="w"> </span><span class="n">thermalSpread</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getMaxwellianIC</span><span class="p">(</span><span class="n">particleCount</span><span class="p">,</span><span class="w"> </span><span class="n">temperature</span><span class="p">,</span><span class="w"> </span><span class="n">particleMass</span><span class="p">);</span>
+</span></code></pre></div></p>
+<h2 id="fields">Fields<a class="headerlink" href="#fields" title="Permanent link">&para;</a></h2>
+<p>The choice of the electric and magnetic fields is entirely arbitrary. They can be left blank to simulate the individual motion of each particle on its own. Once again, the following helpful functions from <code>patric.h</code> will be useful for this purpose. Each of these returns an <code>std::function</code> object that takes two arguments: the position at which to calculate the field, and the time at which to calculate it. The function returns the electric/magnetic field calculated at the provided location at the provided time. The object is initialized as:
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">fields</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Fields</span><span class="p">(</span><span class="n">electricFieldFunction</span><span class="p">,</span><span class="w"> </span><span class="n">magneticFieldFunction</span><span class="p">);</span>
+</span></code></pre></div></p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>For the ease of programming, this function is defined as a <code>FieldGetter</code> type in the header file. It is defined as <code>typedef std::function&lt;Vector3D(Vector3D, real)&gt; FieldGetter;</code></p>
+<p>Thus, each of the following inbuilt function returns an object of type <code>FieldGetter</code>.</p>
+</div>
+<h3 id="inbuilt-fields">Inbuilt Fields<a class="headerlink" href="#inbuilt-fields" title="Permanent link">&para;</a></h3>
+<p>The following helper functions may be used to setup the fields.</p>
+<h4 id="getconstantfield"><code>getConstantField()</code><a class="headerlink" href="#getconstantfield" title="Permanent link">&para;</a></h4>
+<p>Creates a function that returns the same, constant field everywhere at every time-step. Provide the value of this field into the argument as a <code>Vector3D</code> object. </p>
+<h4 id="getsinefield"><code>getSineField()</code><a class="headerlink" href="#getsinefield" title="Permanent link">&para;</a></h4>
+<p>This functions takes the arguments <span class="arithmatex">\( (A, \omega, \phi, v, \hat{u})\)</span> and returns a <code>FieldGetter</code> that calculates the field as:</p>
+<div class="arithmatex">\[
+\vec{E} = A \sin (\omega \cdot v + \phi)\ \hat{u}
+\]</div>
+<p>Here, </p>
+<ul>
+<li>A: amplitude of field.</li>
+<li><span class="arithmatex">\(\omega\)</span>: angular frequency</li>
+<li>v: the field is sinusoidal in this variable. Must be one of <code>T, X, Y,</code> or <code>Z</code></li>
+<li><span class="arithmatex">\(\phi\)</span>: extra phase</li>
+<li><span class="arithmatex">\(\hat{u}\)</span>: unit vector along which, the field points.</li>
+</ul>
+<h4 id="getgaussianfield"><code>getGaussianField()</code><a class="headerlink" href="#getgaussianfield" title="Permanent link">&para;</a></h4>
+<p>Takes the arguments <span class="arithmatex">\((A, \sigma, \mu, m, v, \hat{u})\)</span> and returns a function that drives a gaussian/super-gaussian field using the formula:</p>
+<div class="arithmatex">\[
+\vec{E} = A \exp (-(v-\mu)^m / 2\sigma^m)\ \hat{u}
+\]</div>
+<p>Here, A, u, and v are same as before and</p>
+<ul>
+<li><span class="arithmatex">\(\mu\)</span>: the exponent for the gaussian</li>
+<li><span class="arithmatex">\(\sigma\)</span>: the standard deviation</li>
+</ul>
+<h3 id="custom-fields">Custom Fields<a class="headerlink" href="#custom-fields" title="Permanent link">&para;</a></h3>
+<p>If you want to define your own field, you can use the inbuilt <code>FieldGetter</code> type definition. It is created as follows:
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">FieldGetter</span><span class="w"> </span><span class="n">myCustomField</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[](</span><span class="n">Vector3D</span><span class="w"> </span><span class="n">position</span><span class="p">,</span><span class="w"> </span><span class="n">real</span><span class="w"> </span><span class="n">time</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span><span class="c1">// some work</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Vector3D</span><span class="p">(</span><span class="n">x_component</span><span class="p">,</span><span class="w"> </span><span class="n">y_component</span><span class="p">,</span><span class="w"> </span><span class="n">z_component</span><span class="p">);</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="p">};</span>
+</span></code></pre></div></p>
+<h2 id="output">Output<a class="headerlink" href="#output" title="Permanent link">&para;</a></h2>
+<p>The output object contains information required to store the results of your simulation. Each particle gets its own file numbered from 0 through <code>particleCount-1</code>. Data is stored in tab-separated, human-readable <code>.dat</code> files. You can choose to provide a custom path for these files. The object is initialized as follows:</p>
+<div class="language-cpp highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">string</span><span class="w"> </span><span class="n">outputFileName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"output"</span><span class="p">;</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="n">string</span><span class="w"> </span><span class="n">outputFilePath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"./data/"</span><span class="p">;</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">outputFrequency</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">outputVariables</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">POS_X</span><span class="p">,</span><span class="w"> </span><span class="n">POS_Y</span><span class="p">,</span><span class="w"> </span><span class="n">POS_Z</span><span class="p">,</span><span class="w"> </span><span class="n">VEL_X</span><span class="p">,</span><span class="w"> </span><span class="n">VEL_Y</span><span class="p">,</span><span class="w"> </span><span class="n">VEL_Z</span><span class="p">};</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="n">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Output</span><span class="p">(</span><span class="n">outputFileName</span><span class="p">,</span><span class="w"> </span><span class="n">outputFilePath</span><span class="p">,</span><span class="w"> </span><span class="n">outputFrequency</span><span class="p">,</span><span class="w"> </span><span class="n">outputVariables</span><span class="p">);</span>
+</span></code></pre></div>
+<p>The first three arguments are self-explanatory. The program dumps the information requested via <code>outputVariables</code> vector (discussed below) at every <code>outputFrequency</code>-th iteration. To select which variables are dumped into the file, you can make use of pre-defined constants, which are listed below:</p>
+<ul>
+<li><code>POS_X</code>: particle's position - x component</li>
+<li><code>POS_Y</code>: particle's position - y component</li>
+<li><code>POS_Z</code>: particle's position - z component</li>
+<li><code>VEL_X</code>: particle's velocity - x component</li>
+<li><code>VEL_Y</code>: particle's velocity - y component</li>
+<li><code>VEL_Z</code>: particle's velocity - z component</li>
+<li><code>GAMMA</code>: particle's relativistic factor, calculated as <span class="arithmatex">\(\gamma = \sqrt{1 / (1 - (v/c)^2)}\)</span></li>
+<li><code>E_FIELD_X</code>: electric field experienced by the particle at that time-step - x component</li>
+<li><code>E_FIELD_Y</code>: electric field experienced by the particle at that time-step - y component</li>
+<li><code>E_FIELD_Z</code>: electric field experienced by the particle at that time-step - z component</li>
+<li><code>B_FIELD_X</code>: magnetic field experienced by the particle at that time-step - x component</li>
+<li><code>B_FIELD_Y</code>: magnetic field experienced by the particle at that time-step - y component</li>
+<li><code>B_FIELD_Z</code>: magnetic field experienced by the particle at that time-step - z component</li>
+</ul>
+<h1 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h1>
+<ol>
+<li>M. Yasir and V. Saxena 2025 Phys. Scr. 100 015605, doi: <a id=reference-integrator href="https://www.doi.org/10.1088/1402-4896/ad98c2" target=_blank>10.1088/1402-4896/ad98c2</a></li>
+<li>Boris, Jay P. 1970 Proc. Fourth Conf. Num. Sim. Plasmas. Link: &lt;a id=reference-boris href=<a href="https://www.google.co.in/books/edition/Proceedings_Fourth_Conference_on_Numeric/BrSraqqVxU8C?hl=en">https://www.google.co.in/books/edition/Proceedings_Fourth_Conference_on_Numeric/BrSraqqVxU8C?hl=en</a>&gt;Google Books</a> </li>
+<li>J.-L. Vay. 2008 Physics of Plasmas, 15(5):056701, 02, doi: <a id=reference-vay href=https://doi.org/10.1063/1.2837054>10.1063/1.2837054</a></li>
+<li>A. Higuera and J. R. Cary 2017 IEEE International Conference on Plasma Science (ICOPS), pages 1–1, doi: <a id=reference-hig href=https://doi.org/10.1109/ICOPS36557.2017>10.1109/ICOPS36557.2017</a></li>
+</ol>
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-circle-arrow-up" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16 12-4-4-4 4M12 16V8"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../installation/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Installation">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7M19 12H5"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Installation
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../units/" class="md-footer__link md-footer__link--next" aria-label="Next: Units">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Units
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 Mohammad Yasir
+    </div>
+  
+  
+    Made with
+    <a href="https://zensical.org/" target="_blank" rel="noopener">
+      Zensical
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/hafizmdyasir/" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2026 Fonticons, Inc.--><path fill="currentColor" d="M216.5 362.5c-66-8-112.5-55.5-112.5-117 0-25 9-52 24-70-6.5-16.5-5.5-51.5 2-66 20-2.5 47 8 63 22.5 19-6 39-9 63.5-9s44.5 3 62.5 8.5c15.5-14 43-24.5 63-22 7 13.5 8 48.5 1.5 65.5 16 19 24.5 44.5 24.5 70.5 0 61.5-46.5 108-113.5 116.5 17 11 28.5 35 28.5 62.5v52c0 15 12.5 23.5 27.5 17.5C441 459.5 512 369 512 257 512 115.5 397 0 255.5 0S0 115.5 0 257c0 111 70.5 203 165.5 237.5 13.5 5 26.5-4 26.5-17.5v-40c-7 3-16 5-24 5-33 0-52.5-18-66.5-51.5-5.5-13.5-11.5-21.5-23-23-6-.5-8-3-8-6 0-6 10-10.5 20-10.5 14.5 0 27 9 40 27.5 10 14.5 20.5 21 33 21s20.5-4.5 32-16c8.5-8.5 15-16 21-21"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog" role="status" aria-atomic="true">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      
+      
+        
+        
+      <script id="__config" type="application/json">{"annotate":null,"base":"..","features":["announce.dismiss","content.code.annotate","content.code.copy","content.code.select","content.footnote.tooltips","content.tabs.link","content.tooltips","navigation.footer","navigation.indexes","navigation.instant","navigation.instant.prefetch","navigation.path","navigation.sections","navigation.top","navigation.tracking","search.highlight"],"redirect":null,"search":"../assets/javascripts/workers/search.c47bb847.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","clipboard.error":"Could not copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.a2388154.min.js"></script>
+      
+        <script src="../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
