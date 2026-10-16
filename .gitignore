@@ -2,3 +2,4 @@ build
 benchmarks/internal_testing
 .vscode
 .cache
+/site
