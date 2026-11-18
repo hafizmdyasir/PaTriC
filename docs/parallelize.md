@@ -19,8 +19,8 @@ Doing so will divide the particles among the threads and each thread will push i
     Continuously increasing the number of threads will not necessarily yield maximum performance. The optimal number of threads depends on the number of particles as well as your CPU. You can use the command `lscpu` to see the number of cores available on your machine.
 
 # MPI Parallelization
-!!! note "In Development"
-    MPI parallelization is currently under development and will be available in a future release. This will allow you to run your simulation on multiple nodes and get even more speedup. Stay tuned!
+!!! note "Beta"
+    MPI parallelization is currently under development and the first release is now out. You can run on multiple nodes now. Let us know how the simulation performs!
 
 The optimal MPI parallelization depends on the node/core configuration you are able to access. Typically, it is best to set the number of MPI processes to the number of sockets you have access to, and use the remaining cores for OpenMP threads. Do remember that these are suggestions and you can always experiment with different configurations to see what works best for your simulation.
 

@@ -23,7 +23,7 @@ Helper functions. Must not include any dependency on PaTriC library.
 #include <string>
 #include <chrono>
 
-#define VERSION "2.0.0"
+#define VERSION "2.1.0"
 
 
 

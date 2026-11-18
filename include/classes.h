@@ -102,8 +102,8 @@ public:
     /// @param positions The initial positions of the particles.
     /// @param velocities The initial velocities of the particles.
     /// Note: Initial conditions (positions and velocities may be created via helper functions defined in initial_conditions.h)
-    Particle(unsigned int _count, real _charge, real _mass, vector<Vector3D> positions, vector<Vector3D> velocities)
-        : count(_count), charge(_charge*constants::e), mass(_mass*constants::m_e), positions(positions), velocities(velocities) {}
+    Particle(unsigned int _count, real _charge, real _mass, vector<Vector3D> _pos, vector<Vector3D> _vel)
+        : count(_count), charge(_charge*constants::e), mass(_mass*constants::m_e), positions(std::move(_pos)), velocities(std::move(_vel)) {}
 };
 
 

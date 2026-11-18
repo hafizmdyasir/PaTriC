@@ -11,6 +11,10 @@ CXXFLAGS ?= -std=c++17 -O3 -Wall -fPIC -I./include
 # Add OpenMP support and include path for PATRIC headers
 CXXFLAGS += -I$(PREFIX)/include/patric -fopenmp
 
+ifeq ($(MPI_ENABLED),1)
+	CXXFLAGS += -DMPI_ENABLED
+endif
+
 # Check for USE_SI_UNITS and define it
 ifeq ($(SI_UNITS),1)
 	CXXFLAGS += -DUSE_SI_UNITS
@@ -60,7 +64,7 @@ $(CORE_LIB): $(CORE_OBJS) | $(BUILD_DIR)
 
 # Build the Main Application inside build/
 $(TARGET): $(MAIN_OBJ) $(CORE_LIB) | $(BUILD_DIR)
-	$(CXX) $(CXXFLAGS) $(MAIN_OBJ) $(CORE_LIB) -o $@ -ldl
+	$(CXX) $(CXXFLAGS) $(MAIN_OBJ) $(CORE_LIB) -o $@ -ldl -lm
 
 # Pattern rule to compile source files directly into build/
 $(BUILD_DIR)/%.o: src/%.cpp | $(BUILD_DIR)

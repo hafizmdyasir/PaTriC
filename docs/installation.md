@@ -9,6 +9,7 @@ The installation process has a few simple steps:
 You will need:
 
 1. A C++ compiler that supports OpenMP. Most Linux systems ship with one by default, and you are free to choose whichever you find most suitable. 
+1. For MPI parallelization, you will need an MPI implementation. OpenMPI is a good choice but others will fare just as well (hopefully).
 2. An implementation of Make: The GNU Make that ships with most systems should suffice.
 
 ## Get the code
@@ -35,6 +36,7 @@ make; make install
 You can use the following parameters to control the compilation process:
 
 1. `SI_UNITS`: Do `make SI_UNITS=true` and PaTriC will use SI units for its calculations instead of normalized ones (see [Units](units.md)).
+1. `MPI_ENABLED`: Set this to true to enable MPI parallelization. This will allow you to run your simulation on multiple nodes and get even more speedup. Note that this is still in beta and may not work as expected.
 2. `HIGH_PRECISION/LOW_PRECISION`: If either of these flags are set to true, then the calculation precision will be altered. `HIGH_PRECISION` corresponds to `long double`, while `LOW_PRECISION` corresponds to `float`. By default, `double` is used. Note that this behaviour is machine-dependent.
 3. `DEBUG`: For developers, this adds the flags `-g -O0` to `CXXFLAGS`, allowing for easier debugging.
 

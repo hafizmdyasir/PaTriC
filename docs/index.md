@@ -29,6 +29,7 @@ PaTriC is designed to be highly flexible and easy to use, allowing users to cust
 # Features
 * **Fully relativistic**: The particle push algorithms available in PaTriC take the relativistic factor (gamma) into consideration while calculating the velocity updates. By default, the Boris push is used.
 * **Multi-threading**: By using OpenMP threads, PaTriC can track a large number of particles all at once, making it extremely suitable for nodes with large core counts.
+* **Massively parallel**: PaTriC can utilize the power of MPI. Using `mpirun`, you can run PaTriC on multiple nodes and track millions of particles in a single simulation.
 * **Open-source**: The entire codebase is available on [GitHub](https://www.github.com/hafizmdyasir/PaTriC) under the Apache 2.0 Licence.
 
 

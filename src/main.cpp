@@ -23,15 +23,19 @@ Main file
 
 #include <filesystem>
 #include <iostream>
-#include <limits.h>
-#include <unistd.h>
-#include <string.h>
 #include <iomanip>
 #include <cstdlib>
 #include <dlfcn.h>
-#include <math.h>
 #include <chrono>
 #include <omp.h>
+
+// #define MPI_ENABLED true
+#if MPI_ENABLED
+#include <mpi.h>
+int mpi_rank, mpi_size;
+int totalNumberOfParticles;
+int numberOfParticlesPerProcess;
+#endif
 
 using namespace std;
 
@@ -51,22 +55,8 @@ Output* output;
 
 /// @brief Displays all information provided in the input script and returns true if the user inputs Y or y, implying that the program should proceed with the simulation.
 /// @return true if the user wants to proceed, false otherwise.
-bool displayPrecheckInformation()
+void displayPrecheckInformation()
 {
-     switch (control->integrator)
-     {
-     default:
-     case Pusher::Boris:
-          chosenIntegrator = Boris;
-          break;
-     case Pusher::Vay:
-          chosenIntegrator = Vay;
-          break;
-     case Pusher::HigueraCary:
-          chosenIntegrator = HigueraCary;    
-          break;
-     }
-
      std::cout << endl
           << "System Information\n"
           << "\tIntegration algorithm  : " << getIntegratorName(control->integrator) << "\n"
@@ -82,29 +72,29 @@ bool displayPrecheckInformation()
           std::cout << endl << "Magnetic Field applied...\n";
      
 
+     #if MPI_ENABLED
+     for (int rank = 0; rank < mpi_size; rank++)
+     {
+          int startIndex = rank * numberOfParticlesPerProcess;
+          int endIndex = startIndex + numberOfParticlesPerProcess;
+          if ((endIndex > totalNumberOfParticles) or (rank == (mpi_size - 1))) endIndex = totalNumberOfParticles;
+          std::cout << endl
+               << "Rank " << rank << " will handle particles from index " << startIndex << " to " << endIndex-1;
+     }
+     #else
      std::cout << endl
           << "Target Information\n"
           << "\tCount  : " << target->count << "\n"
           << "\tCharge : " << target->charge << "\n"
           << "\tMass   : " << target->mass << "\n";
+     #endif
 
      std::cout << endl 
-          << "\nProgram will use " << omp_get_max_threads() << " thread(s) for parallelization of "
-          << target->count << " particles.\n";
-
-     char input;
-     std::cout << endl
-          << endl
-          << "Continue? (y/n): ";
-     cin >> input;
-     return (input == 'Y' || input == 'y');
+          << "Program will use " << omp_get_max_threads() << " thread(s) per rank for parallelization.\n";
 }
 
 void performCalculations()
-{
-     std::cout << "\n\nMain calculation loop started...";
-     auto start = chrono::system_clock::now();
-
+{    
      // This outer loop will not be parallelized. It exists to ensure ease on memory usage
      // The program will save data after every iteration of this loop and clear the memory for the next dump.
      unsigned int numberOfDumps = control->numIterations/output->output_f;
@@ -157,16 +147,20 @@ void performCalculations()
                          positions.at(sim_iter+1) = x_next_half + (momenta.at(sim_iter + 1).momentum() * (control->dt / (2*momenta.at(sim_iter + 1).getGamma())));
                     }
                }
-               
+               #if MPI_ENABLED
+               saveData(positions, momenta, eFields, mFields, *output, mpi_rank*numberOfParticlesPerProcess + particleNumber, dumpNumber);
+               #else
                saveData(positions, momenta, eFields, mFields, *output, particleNumber, dumpNumber);
+               #endif
           }
 
+          #if MPI_ENABLED
+          MPI_Barrier(MPI_COMM_WORLD);
+          if (mpi_rank == 0) std::cout << "\n\tDump " << dumpNumber+1 << " of " << numberOfDumps << " completed.";
+          #else
           std::cout << "\n\tDump " << dumpNumber+1 << " of " << numberOfDumps << " completed.";
+          #endif
      }
-
-     auto end = chrono::system_clock::now();
-
-     overallTime = chrono::duration_cast<chrono::milliseconds>(end-start);
 }
 
 void cleanupAndExit(int code)
@@ -177,10 +171,20 @@ void cleanupAndExit(int code)
      if (control) delete control;
      if (handle) dlclose(handle);
      if (filesystem::exists(libraryFile)) filesystem::remove(libraryFile);
+
+     #if MPI_ENABLED
+     if (mpi_rank == 0 and filesystem::exists(libraryFile)) filesystem::remove(libraryFile);
+     if (code == 0) MPI_Finalize();
+     return;
+
+     MPI_Abort(MPI_COMM_WORLD, code);
+     
+     #else
      exit(code);
+     #endif
 }
 
-int compileInput(string name)
+int compileLibrary(string name)
 {
      string compile_cmd = string(RUNTIME_CXX) + " -shared -fPIC " + string(RUNTIME_CXXFLAGS) + " " +
           "-w " + "-I" + string(INSTALL_PREFIX) + "/include/patric " + 
@@ -198,7 +202,7 @@ int compileInput(string name)
      return 0;
 }
 
-int loadLibraryFile() {
+int loadLibrary() {
 
      handle = dlopen(libraryFile.c_str(), RTLD_LAZY);
      char* dlopen_error = dlerror();
@@ -216,23 +220,121 @@ int loadLibraryFile() {
           return 1;
      }
 
-     // Call the configure function to set up the simulation parameters
-     configure(control, target, fields, output);
+     #if MPI_ENABLED
+     // Call the configure function to set up the simulation parameters. First copy to a temporary Particle for MPI runs.
+     Particle* temporaryTarget;
+     configure(control, temporaryTarget, fields, output);
 
-     std::cout << "Simulation configured successfully. \n";
+     totalNumberOfParticles = temporaryTarget->count;
+     numberOfParticlesPerProcess = totalNumberOfParticles / mpi_size;
+
+     // Now, set the target for this process.
+     int startIndex = mpi_rank * numberOfParticlesPerProcess;
+     int endIndex = startIndex + numberOfParticlesPerProcess;
+     if ((endIndex > totalNumberOfParticles) or (mpi_rank == mpi_size - 1)) endIndex = totalNumberOfParticles;
+     
+     // Create a new Particle object for this process with the subset of particles assigned to it.
+     vector<Vector3D> positionsSubset(temporaryTarget->positions.begin() + startIndex, temporaryTarget->positions.begin() + endIndex);
+     vector<Vector3D> velocitiesSubset(temporaryTarget->velocities.begin() + startIndex, temporaryTarget->velocities.begin() + endIndex);
+     target = new Particle(positionsSubset.size(), temporaryTarget->charge, temporaryTarget->mass,positionsSubset, velocitiesSubset);
+
+     delete temporaryTarget;
+     #else
+
+     // Load all particles in the target for non-MPI runs.
+     configure(control, target, fields, output);       
+     #endif
      return 0;
 }
 
+#if MPI_ENABLED
+int main(int argc, char **argv)
+{
+     MPI_Init(&argc, &argv);
+     MPI_Comm_rank(MPI_COMM_WORLD, &mpi_rank);
+     MPI_Comm_size(MPI_COMM_WORLD, &mpi_size);
+
+     if (mpi_rank == 0) {
+          printHeader();
+          std::cout << "MPI is enabled. Total number of processes: " << mpi_size << "\n";
+
+          if (argc < 2)
+          {
+               std::cerr << "No configuration file specified. Program will exit." << endl;
+               MPI_Abort(MPI_COMM_WORLD, 808);
+          }
+
+          string inputScriptPath = argv[1];
+          std::cout << "\nInput file : " << inputScriptPath << endl;
+          if (!filesystem::exists(inputScriptPath))
+          {
+               std::cerr << "The provided configuration file does not exist. Program will exit." << endl;
+               MPI_Abort(MPI_COMM_WORLD, 404);
+          }
+
+          int compilationResult = compileLibrary(inputScriptPath);
+          if (compilationResult) cleanupAndExit(compilationResult);
+          std::cout << "Simulation configured successfully. \n";
+     }
+     MPI_Barrier(MPI_COMM_WORLD);
+
+     int loadingResult = loadLibrary();
+     if (loadingResult) cleanupAndExit(loadingResult);
+     
+     if (!validateInitialConditions(control, target, fields, output)) cleanupAndExit(-1);
+     MPI_Barrier(MPI_COMM_WORLD);
+
+     if(mpi_rank == 0)
+          displayPrecheckInformation();
+     
+     chrono::system_clock::time_point start, end;
+     presetIntegrators(*target, control->dt);
+     for (unsigned int i = 0; i < target->count; i++)
+          if (setupDiagnostic(*output, mpi_rank*numberOfParticlesPerProcess + i)) cleanupAndExit(-1);
+     
+          
+     if (mpi_rank == 0) start = chrono::system_clock::now();
+
+     switch (control->integrator)
+     {
+          default:
+          case Pusher::Boris:
+          chosenIntegrator = Boris;
+          break;
+          case Pusher::Vay:
+          chosenIntegrator = Vay;
+          break;
+          case Pusher::HigueraCary:
+          chosenIntegrator = HigueraCary;    
+          break;
+     }
+          
+     MPI_Barrier(MPI_COMM_WORLD);
+     
+     performCalculations();
+     
+     MPI_Barrier(MPI_COMM_WORLD);
+
+     if (mpi_rank == 0) {
+          end = chrono::system_clock::now();
+          overallTime = chrono::duration_cast<chrono::milliseconds>(end-start);
+          std::cout << fixed << setprecision(4) << "\n\nTotal time for all particles: " << formatDuration(overallTime) << ".\n"; 
+     }
+     cleanupAndExit(0);
+     return 0;
+}
+
+#else
 int main(int argc, char **argv)
 {
      printHeader();
-
+     
      if (argc < 2)
      {
           std::cerr << "No configuration file specified. Program will exit." << endl;
           return 808;
      }
-
+     
      string inputScriptPath = argv[1];
      std::cout << "\nInput file : " << inputScriptPath << endl;
      if (!filesystem::exists(inputScriptPath))
@@ -240,28 +342,50 @@ int main(int argc, char **argv)
           std::cerr << "The provided configuration file does not exist. Program will exit." << endl;
           return 404;
      }
-
-     int compilationResult = compileInput(inputScriptPath);
+     
+     int compilationResult = compileLibrary(inputScriptPath);
      if (compilationResult) cleanupAndExit(compilationResult);
-    
-
-     int loadingResult = loadLibraryFile();
+     
+     
+     int loadingResult = loadLibrary();
      if (loadingResult) cleanupAndExit(loadingResult);
-
-
+     
+     
      if (!validateInitialConditions(control, target, fields, output)) cleanupAndExit(-1);
      else cout << "Initial conditions complete and valid... :)\n";
-     if (!displayPrecheckInformation()) cleanupAndExit(-1);
-
-     presetIntegrators(*target, control->dt);
-
-     for (unsigned int i = 0; i < target->count; i++)
-          if (setupDiagnostic(*output, i)) cleanupAndExit(-1);
      
+     displayPrecheckInformation();
+     
+     switch (control->integrator)
+     {
+     default:
+     case Pusher::Boris:
+          chosenIntegrator = Boris;
+          break;
+     case Pusher::Vay:
+          chosenIntegrator = Vay;
+          break;
+     case Pusher::HigueraCary:
+          chosenIntegrator = HigueraCary;    
+          break;
+     }
+     
+     
+     presetIntegrators(*target, control->dt);
+     
+     for (unsigned int i = 0; i < target->count; i++)
+     if (setupDiagnostic(*output, i)) cleanupAndExit(-1);
+     
+     auto start = chrono::system_clock::now();
+     
+     std::cout << "\n\nMain calculation loop started...";
      performCalculations();
-
+     
+     auto end = chrono::system_clock::now();
+     overallTime = chrono::duration_cast<chrono::milliseconds>(end-start);
      std::cout << fixed << setprecision(4) << "\n\nTotal time for all particles: " << formatDuration(overallTime) << ".\n"; 
-          
+     
      cleanupAndExit(0);
      return 0;
 }
+#endif

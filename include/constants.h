@@ -62,6 +62,12 @@ constexpr std::array<std::string_view, 3> INTEGRATORS = {
 
 using namespace std;
 
+#ifdef MPI_ENABLED
+#define MPI_ENABLED 1
+#else
+#define MPI_ENABLED 0
+#endif
+
 #ifdef USE_SI_UNITS
 struct constants
 {
